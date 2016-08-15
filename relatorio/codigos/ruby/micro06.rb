@@ -3,16 +3,15 @@
 puts("Digite um numero 1 a 5:")
 numero = gets.chomp.to_i
 
-case numero
-when 1
+if numero == 1
   puts("Um")
-when 2
+elsif numero == 2
   puts("Dois")
-when 3
+elsif numero == 3
   puts("Tres")
-when 4
+elsif numero == 4
   puts("Quatro")
-when 5
+elsif numero == 5
   puts("Cinco")
 else
   puts("Numero invalido!!!")
