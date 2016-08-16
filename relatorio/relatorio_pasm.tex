@@ -317,6 +317,12 @@ Os arquivos PASM e PIR são convertidos para Parrot Bytecode (PBC) e somente ent
 \$ parrot -o output.pbc input.pasm
 \end{terminal}
 
+De acordo com a documentação oficial, o Compilador Intermediário de Parrot é capaz de traduzir códigos PIR para PASM através do comando:
+\begin{terminal}
+\$ parrot -o output.pasm input.pir
+\end{terminal}
+Mas essa execução resultou em um código bytecode invés do assembly.
+
 Apesar da documentação oficial enfatizar que PIR é mais utilizado e mais recomendado para o desenvolvimento de compiladores para Parrot, o alvo será a linguagem Assembly PASM.
 
 \subsection{Parrot Assembly Language (PASM)}
@@ -349,7 +355,52 @@ para compiladores de linguagens de alto nível gerarem código PIR para
 trabalhar com a maquina Parrot.
 Mais informações sobre PIR e sua sintaxe podem ser encontradas em [5].
 
+\chapter{Compilação de Código Ruby para Parrot Intermediate Representation (PIR)}
+O compilador que será utilizado será o Cardinal [6], é um compilador
+da linguagem Ruby para a máquina virtual Parrot capaz de gerar código
+o código intermediário (PIR) como saída.
+
+A documentação do compilador é simples e clara, para baixar o
+compilador basta digitar no terminal:
+\begin{terminal}
+\$ git clone git://github.com/parrot/cardinal.git
+\end{terminal}
+Entre as várias opções de instalação, é possível faze-la utilizando do
+próprio parrot, para isso basta entrar na pasta onde foi baixado o
+Cardinal e digitar:
+\begin{terminal}
+\$ winxed setup.winxed build
+\end{terminal}
+
+Para compilar é necessário estar na pasta de instalação e o comando é:
+\begin{terminal}
+\$ parrot cardinal.pbc [arquivo].rb
+\end{terminal}
+Sendo o arquivo o diretório do arquivo Ruby que se deseja executar,
+para gerar o PIR o comando é:
+\begin{terminal}
+\$ parrot cardinal.pbc -o [output].pir --target=pir [arquivo].rb
+\end{terminal}
+Sendo output o diretório onde será salvo o arquivo PIR.
+
+\subsubsection{Exemplo}
+\lstinputlisting[caption={Programa nano 01 em Ruby}]{codigos/ruby/nano01.rb}
+Compilação do Código Ruby:
+\begin{terminal}
+\$ parrot /Users/oliveira/cardinal/cardinal/cardinal.pbc -o
+../parrot/nano01.pir --target=pir nano01.rb
+\end{terminal}
+\lstinputlisting[caption={Programa nano 01 em PIR}]{codigos/parrot/nano01.pir}
+
+A compilação dos programas Ruby não foi bem sucedida para todos os programas, além disso, programas que utilizavam a linha de código a seguir, que é utilizada para pegar dados do usuário, compilavam mas não funcionavam na máquina virtual.
+\begin{terminal}
+input = gets.chomp
+\end{terminal}
+
+
 \chapter{Códigos LUA e Parrot Assembly (PASM)}
+
+Os códigos PASM dessa seção foram feitos manualmente, não foram utilizados compiladores para esse fim.
 
 \subsection{Nano Programas}
 \subsubsection{Nano 01}
