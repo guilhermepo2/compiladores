@@ -1,5 +1,5 @@
--- Listagem 17: Lê strings e caracteres
---[[ Função: Escrever um algoritmo que leia o nome e o sexo de 56 pessoas e informe o nome e se ela é homem ou mulher. No final informe o total de homens e mulheres --]]
+-- Listagem 17: Le strings e caracteres
+--[[ Funcao: Escrever um algoritmo que leia o nome e o sexo de 56 pessoas e informe o nome e se ela e homem ou mulher. No final informe o total de homens e mulheres --]]
 
 h = 0
 m = 0

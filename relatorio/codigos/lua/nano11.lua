@@ -1,4 +1,4 @@
--- Listagem 11: Introdução do comando de repetição enquanto
+-- Listagem 11: Introducao do comando de repeticao enquanto
 n = 1
 m = 2
 x = 5

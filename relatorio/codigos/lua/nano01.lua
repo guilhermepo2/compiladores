@@ -1,1 +1,1 @@
--- Listagem 1: Módulo mínimo que caracteriza um programa
+-- Listagem 1: Modulo minimo que caracteriza um programa

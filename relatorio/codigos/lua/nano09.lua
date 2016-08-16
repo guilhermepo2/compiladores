@@ -1,4 +1,4 @@
--- Listagem 9: Atribuição de duas operações aritméticas sobre inteiros a uma variável
+-- Listagem 9: Atribuicao de duas operacoes aritmeticas sobre inteiros a uma variavel
 
 n = 1 + 1 / 2
 if (n == 1)

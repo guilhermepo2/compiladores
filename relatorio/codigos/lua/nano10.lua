@@ -1,4 +1,4 @@
--- Listagem 10: Atribuição de duas variáveis inteiras
+-- Listagem 10: Atribuicao de duas variaveis inteiras
 n = 1
 m = 2
 

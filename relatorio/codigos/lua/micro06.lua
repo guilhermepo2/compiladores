@@ -1,6 +1,6 @@
--- Escreve um número lido por extenso
+-- Escreve um numero lido por extenso
 
---[[ Função: Faça um algoritmo que leia um número de 1 a 5 e o escreva por extenso. Caso o usuário digite um número que não esteja nesse intervalo, exibir mensagem: número invalido --]]
+--[[ Funcao: Faça um algoritmo que leia um número de 1 a 5 e o escreva por extenso. Caso o usuario digite um numero que nao esteja nesse intervalo, exibir mensagem: numero invalido --]]
 
 print("Digite um número de 1 a 5")
 numero = io.read("*number")

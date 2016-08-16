@@ -1,6 +1,6 @@
 --Listagem 22: Calcula o fatorial de um numero
 
---[[ Função: recebe um número e calcula recursivamente o fatorial desse número --]]
+--[[ Funcao: recebe um numero e calcula recursivamente o fatorial desse número --]]
 
 function fatorial(n)
 	 if(n <= 0)

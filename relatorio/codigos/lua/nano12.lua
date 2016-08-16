@@ -1,4 +1,4 @@
---  Listagem 12: Comando condicional aninhado em um comando de repetição
+--  Listagem 12: Comando condicional aninhado em um comando de repeticao
 n = 1
 m = 2
 x = 5

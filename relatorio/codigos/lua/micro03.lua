@@ -1,5 +1,5 @@
--- Lê um número e verifica se ele está entre 100 e 200
---[[ Função: Faça um algoritmo que receba um número e diga se este número está no intervalo entre 100 e 200 --]]
+-- Le um numero e verifica se ele esta entre 100 e 200
+--[[ Funcao: Faca um algoritmo que receba um numero e diga se este numero esta no intervalo entre 100 e 200 --]]
 
 print("Digite um número:")
 numero = io.read("*number")

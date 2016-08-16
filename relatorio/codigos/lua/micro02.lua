@@ -1,6 +1,6 @@
--- Listagem 14: Ler dois inteiros e decide qual é maior
+-- Listagem 14: Ler dois inteiros e decide qual e maior
 
---[[ Função : Escrever um algoritmo que leia dois valores inteiro distintos e informe qual é o maior --]]
+--[[ Funcao : Escrever um algoritmo que leia dois valores inteiro distintos e informe qual e o maior --]]
 
 print("Escreva o primeiro número:")
 num1 = io.read("*number")

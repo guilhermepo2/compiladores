@@ -1,6 +1,6 @@
--- Listagem 19: Decide se os números são positivos, zeros ou negativos
+-- Listagem 19: Decide se os numeros sao positivos, zeros ou negativos
 
---[[ Função: Faça um algoritmo que receba N números e mostre positivo, negativo ou zero para cada número --]]
+--[[ Funcao: Faca um algoritmo que receba N numeros e mostre positivo, negativo ou zero para cada número --]]
 
 programa = 1
 while (programa == 1)

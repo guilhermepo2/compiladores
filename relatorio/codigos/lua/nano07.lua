@@ -1,4 +1,4 @@
--- Listagem 7: Inclusão do comando condicional
+-- Listagem 7: Inclusao do comando condicional
 n = 1
 if (n == 1)
 then
