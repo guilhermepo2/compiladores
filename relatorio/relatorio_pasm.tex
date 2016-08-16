@@ -390,7 +390,7 @@ Compilação do Código Ruby:
 $ parrot /Users/oliveira/cardinal/cardinal/cardinal.pbc -o
 ../parrot/nano01.pir --target=pir nano01.rb
 \end{terminal}
-\lstinputlisting[caption={Programa nano 01 em PIR}]{codigos/parrot/nano01.pir}
+\lstinputlisting[caption={Programa nano 01 em PIR}]{codigos/parrot/pir/nano01.pir}
 
 A compilação dos programas Ruby não foi bem sucedida para todos os programas, além disso, programas que utilizavam a linha de código a seguir, que é utilizada para pegar dados do usuário, compilavam mas não funcionavam na máquina virtual.
 \begin{terminal}
@@ -405,23 +405,23 @@ Os códigos PASM dessa seção foram feitos manualmente, não foram utilizados c
 \subsection{Nano Programas}
 \subsubsection{Nano 01}
 \lstinputlisting[caption={Programa nano 01 em Lua}]{codigos/lua/nano01.lua}
-\lstinputlisting[caption={Programa nano 01 em PASM}]{codigos/parrot/nano01.pasm}
+\lstinputlisting[caption={Programa nano 01 em PASM}]{codigos/parrot/pasm/nano01.pasm}
 
 \subsubsection{Nano 02}
 \lstinputlisting[caption={Programa nano 02 em Lua}]{codigos/lua/nano02.lua}
-\lstinputlisting[caption={Programa nano 02 em PASM}]{codigos/parrot/nano02.pasm}
+\lstinputlisting[caption={Programa nano 02 em PASM}]{codigos/parrot/pasm/nano02.pasm}
 
 \subsubsection{Nano 03}
 \lstinputlisting[caption={Programa nano 03 em Lua}]{codigos/lua/nano03.lua}
-\lstinputlisting[caption={Programa nano 03 em PASM}]{codigos/parrot/nano03.pasm}
+\lstinputlisting[caption={Programa nano 03 em PASM}]{codigos/parrot/pasm/nano03.pasm}
 
 \subsubsection{Nano 04}
 \lstinputlisting[caption={Programa nano 04 em Lua}]{codigos/lua/nano04.lua}
-\lstinputlisting[caption={Programa nano 04 em PASM}]{codigos/parrot/nano04.pasm}
+\lstinputlisting[caption={Programa nano 04 em PASM}]{codigos/parrot/pasm/nano04.pasm}
 
 \subsubsection{Nano 05}
 \lstinputlisting[caption={Programa nano 05 em Lua}]{codigos/lua/nano05.lua}
-\lstinputlisting[caption={Programa nano 05 em PASM}]{codigos/parrot/nano05.pasm}
+\lstinputlisting[caption={Programa nano 05 em PASM}]{codigos/parrot/pasm/nano05.pasm}
 Saída:
 \begin{terminal}
 2
@@ -429,7 +429,7 @@ Saída:
 
 \subsubsection{Nano 06}
 \lstinputlisting[caption={Programa nano 06 em Lua}]{codigos/lua/nano06.lua}
-\lstinputlisting[caption={Programa nano 06 em PASM}]{codigos/parrot/nano06.pasm}
+\lstinputlisting[caption={Programa nano 06 em PASM}]{codigos/parrot/pasm/nano06.pasm}
 Saída:
 \begin{terminal}
 -1
@@ -437,7 +437,7 @@ Saída:
 
 \subsubsection{Nano 07}
 \lstinputlisting[caption={Programa nano 07 em Lua}]{codigos/lua/nano07.lua}
-\lstinputlisting[caption={Programa nano 07 em PASM}]{codigos/parrot/nano07.pasm}
+\lstinputlisting[caption={Programa nano 07 em PASM}]{codigos/parrot/pasm/nano07.pasm}
 Saída:
 \begin{terminal}
 1
@@ -445,7 +445,7 @@ Saída:
 
 \subsubsection{Nano 08}
 \lstinputlisting[caption={Programa nano 08 em Lua}]{codigos/lua/nano08.lua}
-\lstinputlisting[caption={Programa nano 08 em PASM}]{codigos/parrot/nano08.pasm}
+\lstinputlisting[caption={Programa nano 08 em PASM}]{codigos/parrot/pasm/nano08.pasm}
 Saída:
 \begin{terminal}
 1
@@ -453,7 +453,7 @@ Saída:
 
 \subsubsection{Nano 09}
 \lstinputlisting[caption={Programa nano 09 em Lua}]{codigos/lua/nano09.lua}
-\lstinputlisting[caption={Programa nano 09 em PASM}]{codigos/parrot/nano09.pasm}
+\lstinputlisting[caption={Programa nano 09 em PASM}]{codigos/parrot/pasm/nano09.pasm}
 Saída:
 \begin{terminal}
 1
@@ -461,7 +461,7 @@ Saída:
 
 \subsubsection{Nano 10}
 \lstinputlisting[caption={Programa nano 10 em Lua}]{codigos/lua/nano10.lua}
-\lstinputlisting[caption={Programa nano 10 em PASM}]{codigos/parrot/nano10.pasm}
+\lstinputlisting[caption={Programa nano 10 em PASM}]{codigos/parrot/pasm/nano10.pasm}
 Saída:
 \begin{terminal}
 0
@@ -469,7 +469,7 @@ Saída:
 
 \subsubsection{Nano 11}
 \lstinputlisting[caption={Programa nano 11 em Lua}]{codigos/lua/nano11.lua}
-\lstinputlisting[caption={Programa nano 11 em PASM}]{codigos/parrot/nano11.pasm}
+\lstinputlisting[caption={Programa nano 11 em PASM}]{codigos/parrot/pasm/nano11.pasm}
 Saída:
 \begin{terminal}
 3
@@ -478,7 +478,7 @@ Saída:
 
 \subsubsection{Nano 12}
 \lstinputlisting[caption={Programa nano 12 em Lua}]{codigos/lua/nano12.lua}
-\lstinputlisting[caption={Programa nano 12 em PASM}]{codigos/parrot/nano12.pasm}
+\lstinputlisting[caption={Programa nano 12 em PASM}]{codigos/parrot/pasm/nano12.pasm}
 Saída:
 \begin{terminal}
 0
@@ -490,7 +490,7 @@ Saída:
 \subsection{Micro Programas}
 \subsubsection{Micro 01}
 \lstinputlisting[caption={Programa micro 01 em Lua}]{codigos/lua/micro01.lua}
-\lstinputlisting[caption={Programa Micro 01 em PASM}]{codigos/parrot/micro01.pasm}
+\lstinputlisting[caption={Programa Micro 01 em PASM}]{codigos/parrot/pasm/micro01.pasm}
 \begin{terminal}
 Tabela de Conversao: Celsius -> Fahrenheit
 Digite a Temperatura em Celsius: 20
@@ -499,7 +499,7 @@ A nova temperatura e: 68 graus F.
 
 \subsubsection{Micro 02}
 \lstinputlisting[caption={Programa micro 02 em Lua}]{codigos/lua/micro02.lua}
-\lstinputlisting[caption={Programa Micro 02 em PASM}]{codigos/parrot/micro02.pasm}
+\lstinputlisting[caption={Programa Micro 02 em PASM}]{codigos/parrot/pasm/micro02.pasm}
 \begin{terminal}
 Digite o primeiro numero: 10
 Digite o segundo numero: 20
@@ -511,7 +511,7 @@ o primeiro numero e maior que o segundo numero
 
 \subsubsection{Micro 03}
 \lstinputlisting[caption={Programa micro 03 em Lua}]{codigos/lua/micro03.lua}
-\lstinputlisting[caption={Programa Micro 03 em PASM}]{codigos/parrot/micro03.pasm}
+\lstinputlisting[caption={Programa Micro 03 em PASM}]{codigos/parrot/pasm/micro03.pasm}
 \begin{terminal}
 Digite um numero: 5
 O numero nao esta no intervalo entre 100 e 200
@@ -525,7 +525,7 @@ O numero nao esta no intervalo entre 100 e 200
 
 \subsubsection{Micro 04}
 \lstinputlisting[caption={Programa micro 04 em Lua}]{codigos/lua/micro04.lua}
-\lstinputlisting[caption={Programa Micro 04 em PASM}]{codigos/parrot/micro04.pasm}
+\lstinputlisting[caption={Programa Micro 04 em PASM}]{codigos/parrot/pasm/micro04.pasm}
 \begin{terminal}
 Digite um numero: 50
 Digite um numero: 50
@@ -544,7 +544,7 @@ Ao total foram digitados 2 numeros no intervalo entre 10 e 150.
 
 \subsubsection{Micro 05}
 \lstinputlisting[caption={Programa micro 05 em Lua}]{codigos/lua/micro05.lua}
-\lstinputlisting[caption={Programa Micro 05 em PASM}]{codigos/parrot/micro05.pasm}
+\lstinputlisting[caption={Programa Micro 05 em PASM}]{codigos/parrot/pasm/micro05.pasm}
 \begin{terminal}
 H - Homem ou M - Mulher: H
 H - Homem ou M - Mulher: M
@@ -557,7 +557,7 @@ Foram inseridas 3 mulheres
 
 \subsubsection{Micro 06}
 \lstinputlisting[caption={Programa micro 06 em Lua}]{codigos/lua/micro06.lua}
-\lstinputlisting[caption={Programa Micro 06 em PASM}]{codigos/parrot/micro06.pasm}
+\lstinputlisting[caption={Programa Micro 06 em PASM}]{codigos/parrot/pasm/micro06.pasm}
 \begin{terminal}
 Digite um numero de 1 a 5: 3
 Tres
@@ -565,7 +565,7 @@ Tres
 
 \subsubsection{Micro 07}
 \lstinputlisting[caption={Programa micro 07 em Lua}]{codigos/lua/micro07.lua}
-\lstinputlisting[caption={Programa Micro 07 em PASM}]{codigos/parrot/micro07.pasm}
+\lstinputlisting[caption={Programa Micro 07 em PASM}]{codigos/parrot/pasm/micro07.pasm}
 \begin{terminal}
 Digite um numero: 5
 Positivo!
@@ -580,7 +580,7 @@ Deseja finalizar? (S/N): S
 
 \subsubsection{Micro 08}
 \lstinputlisting[caption={Programa micro 08 em Lua}]{codigos/lua/micro08.lua}
-\lstinputlisting[caption={Programa Micro 08 em PASM}]{codigos/parrot/micro08.pasm}
+\lstinputlisting[caption={Programa Micro 08 em PASM}]{codigos/parrot/pasm/micro08.pasm}
 \begin{terminal}
 Digite um numero: 50
 O numero 50 e maior que 10.
@@ -592,7 +592,7 @@ O numero 0 e menor que 10.
 
 \subsubsection{Micro 09}
 \lstinputlisting[caption={Programa micro 09 em Lua}]{codigos/lua/micro09.lua}
-\lstinputlisting[caption={Programa Micro 09 em PASM}]{codigos/parrot/micro09.pasm}
+\lstinputlisting[caption={Programa Micro 09 em PASM}]{codigos/parrot/pasm/micro09.pasm}
 \begin{terminal}
 Digite o preco: 10
 Digite a venda: 10
@@ -609,7 +609,7 @@ O novo preco e: 72
 
 \subsubsection{Micro 10}
 \lstinputlisting[caption={Programa micro 10 em Lua}]{codigos/lua/micro10.lua}
-\lstinputlisting[caption={Programa Micro 10 em PASM}]{codigos/parrot/micro10.pasm}
+\lstinputlisting[caption={Programa Micro 10 em PASM}]{codigos/parrot/pasm/micro10.pasm}
 \begin{terminal}
 Digite um numero: 5
 O fatorial de 5 e: 120
@@ -617,7 +617,7 @@ O fatorial de 5 e: 120
 
 \subsubsection{Micro 11}
 \lstinputlisting[caption={Programa micro 11 em Lua}]{codigos/lua/micro11.lua}
-\lstinputlisting[caption={Programa Micro 11 em PASM}]{codigos/parrot/micro11.pasm}
+\lstinputlisting[caption={Programa Micro 11 em PASM}]{codigos/parrot/pasm/micro11.pasm}
 \begin{terminal}
 Digite um numero: 5
 Positivo
