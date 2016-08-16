@@ -239,7 +239,7 @@ o processo de instalação dos componentes necessários.
 Para instalar o homebrew basta digitar no terminal:
 
 \begin{terminal}
-\$ /usr/bin/ruby -e "\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+$ /usr/bin/ruby -e "\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 \end{terminal}
 
 
@@ -247,7 +247,7 @@ Para instalar o homebrew basta digitar no terminal:
 \subsection{Instalação e Teste}
 Para instalar Lua através do homebrew, basta digitar no terminal:
 \begin{terminal}
-\$ brew install lua
+$ brew install lua
 \end{terminal}
 Resultado:
 \begin{figure}[!ht]
@@ -265,7 +265,7 @@ Lua é uma linguagem de programação de extensão, projetada para dar suporte �
 \subsection{Instalação e Teste}
 Novamente através do homebrew, basta digitar:
 \begin{terminal}
-\$ brew install ocaml
+$ brew install ocaml
 \end{terminal}
 Resultado:
 \begin{figure}[!ht]
@@ -282,7 +282,7 @@ OCaml é uma linguagem de programação funcional, imperativa e orientada à obj
 \subsection{Instalação e Teste}
 Digitar no Terminal:
 \begin{terminal}
-\$ brew install parrot
+$ brew install parrot
 \end{terminal}
 Resultado:
 \begin{figure}[!ht]
@@ -303,23 +303,23 @@ Fazendo alguns testes com PASM e PIR:
 \lstinputlisting[caption={Output Simples em Parrot Assembly Language}]{codigos/parrot/news.pasm}
 Para executar o código:
 \begin{terminal}
-\$ parrot news.pasm
+$ parrot news.pasm
 \end{terminal}
 
 \lstinputlisting[caption={Output Simples em Parrot Intermediate Representation}]{codigos/parrot/hello.pir}
 Para executar o código:
 \begin{terminal}
-\$ parrot hello.pir
+$ parrot hello.pir
 \end{terminal}
 
 Os arquivos PASM e PIR são convertidos para Parrot Bytecode (PBC) e somente então são executados pela máquina virutal, é possível obter o arquivo .pbc através comando:
 \begin{terminal}
-\$ parrot -o output.pbc input.pasm
+$ parrot -o output.pbc input.pasm
 \end{terminal}
 
 De acordo com a documentação oficial, o Compilador Intermediário de Parrot é capaz de traduzir códigos PIR para PASM através do comando:
 \begin{terminal}
-\$ parrot -o output.pasm input.pir
+$ parrot -o output.pasm input.pir
 \end{terminal}
 Mas essa execução resultou em um código bytecode invés do assembly.
 
@@ -363,23 +363,23 @@ o código intermediário (PIR) como saída.
 A documentação do compilador é simples e clara, para baixar o
 compilador basta digitar no terminal:
 \begin{terminal}
-\$ git clone git://github.com/parrot/cardinal.git
+$ git clone git://github.com/parrot/cardinal.git
 \end{terminal}
 Entre as várias opções de instalação, é possível faze-la utilizando do
 próprio parrot, para isso basta entrar na pasta onde foi baixado o
 Cardinal e digitar:
 \begin{terminal}
-\$ winxed setup.winxed build
+$ winxed setup.winxed build
 \end{terminal}
 
 Para compilar é necessário estar na pasta de instalação e o comando é:
 \begin{terminal}
-\$ parrot cardinal.pbc [arquivo].rb
+$ parrot cardinal.pbc [arquivo].rb
 \end{terminal}
 Sendo o arquivo o diretório do arquivo Ruby que se deseja executar,
 para gerar o PIR o comando é:
 \begin{terminal}
-\$ parrot cardinal.pbc -o [output].pir --target=pir [arquivo].rb
+$ parrot cardinal.pbc -o [output].pir --target=pir [arquivo].rb
 \end{terminal}
 Sendo output o diretório onde será salvo o arquivo PIR.
 
@@ -387,7 +387,7 @@ Sendo output o diretório onde será salvo o arquivo PIR.
 \lstinputlisting[caption={Programa nano 01 em Ruby}]{codigos/ruby/nano01.rb}
 Compilação do Código Ruby:
 \begin{terminal}
-\$ parrot /Users/oliveira/cardinal/cardinal/cardinal.pbc -o
+$ parrot /Users/oliveira/cardinal/cardinal/cardinal.pbc -o
 ../parrot/nano01.pir --target=pir nano01.rb
 \end{terminal}
 \lstinputlisting[caption={Programa nano 01 em PIR}]{codigos/parrot/nano01.pir}
@@ -631,21 +631,21 @@ Zero
 
 
 \chapter{Referências}
-[1] Documentação Lua - https://www.lua.org/docs.html
+[1] Documentação Lua - \url{https://www.lua.org/docs.html}
 
-[2] Documentação OCaml - https://ocaml.org/docs/
+[2] Documentação OCaml - \url{https://ocaml.org/docs/}
 
-[3] Wikibooks, Parrot Virtual Machine - https://en.wikibooks.org/wiki/Parrot_Virtual_Machine
+[3] Wikibooks, Parrot Virtual Machine - \url{https://en.wikibooks.org/wiki/Parrot_Virtual_Machine}
 
-[4] Wikibooks, PASM Reference - https://en.wikibooks.org/wiki/Parrot_Virtual_Machine/PASM_Reference
+[4] Wikibooks, PASM Reference - \url{https://en.wikibooks.org/wiki/Parrot_Virtual_Machine/PASM_Reference}
 
-[5] Wikibooks, Parrot Intermediate Representation (PIR) - https://en.wikibooks.org/wiki/Parrot_Virtual_Machine/Parrot_Intermediate_Representation
+[5] Wikibooks, Parrot Intermediate Representation (PIR) - \url{https://en.wikibooks.org/wiki/Parrot_Virtual_Machine/Parrot_Intermediate_Representation}
 
-[6] - Cardinal, Github - https://github.com/parrot/cardinal/
+[6] Cardinal, Github - \url{https://github.com/parrot/cardinal/}
 
-[7] - Opcodes de PASM - http://docs.parrot.org/parrot/latest/html/ops.html
+[7] Opcodes de PASM - \url{http://docs.parrot.org/parrot/latest/html/ops.html}
 
-[8] Parrot Documentation, Exemplos de PASM - http://parrot.org/dev/examples/pasm
+[8] Parrot Documentation, Exemplos de PASM - \url{http://parrot.org/dev/examples/pasm}
 
 \clearpage
 \addcontentsline{toc}{part}{Apêndice}
