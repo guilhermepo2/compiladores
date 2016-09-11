@@ -635,11 +635,11 @@ Zero
 A linguagem a ser interpretada é uma linguagem simples que reconhece algumas palavras reservadas básicas de todas as linguagens de programação, como: print, if, then, else e comandos como atribuição, soma, subtração e multiplicação, além de reconhecer identificadores e números inteiros, todas as linhas devem ser terminadas com um ponto e vírgula, um exemplo de um programa nessa linguagem:
 
 \begin{terminal}
-b := 2;
-a := 1 + b;
+b = 2;
+a = 1 + b;
 print (a * b);
-if1 := a - 2;
-if2 := b + 3;
+if1 = a - 2;
+if2 = b + 3;
 if if1 > 0
 then print(if1);
 else print(if2);
@@ -651,7 +651,7 @@ O autômato capaz de interpretar a linguagem é um autômato do tipo M = (ALF, Q
 
 ALF = o alfabeto de entrada é qualquer conjunto de palavras sobre o conjunto ASCII 2
 
-Q = {inicio, p, pr, pri, prin, print, i, if, t, th, the, then, e, el, els, else, identificador, inteiro, abre-parentese, fecha-parentese, comparador-maior, operador-soma, operador-subtracao, operador-multiplicacao, atribuicao, ponto-virgula, estado-morto}
+Q = {inicio, p, pr, pri, prin, print, i, if, t, th, the, then, e, el, els, else, identificador, inteiro, abre-parentese, fecha-parentese, comparador, operador, atribuicao, ponto-virgula, estado-morto}
 
 qo = inicio
 
@@ -673,55 +673,182 @@ A função de transição será descrita na forma:
 
 (inicio, ')', fecha-parentese)
 
-(inicio, '>', comparador-maior)
+(inicio, '>', comparador)
 
-(inicio, '+', operador-soma)
-
-(inicio, '-', operador-subtracao)
-
-(inicio, '*', operador-multiplicacao)
+(inicio, '+', '-', '*', operador)
 
 (inicio, ':=', atribuicao)
 
 (inicio, ';', ponto-virgula)
 
+(inicio, '0'-'9', inteiro)
+
+(inicio, 'a'-'z', 'A'-'Z' ou '\_', identificador)
+
 (p, 'r', pr)
 
-(p, 'a'-'z' exceto 'r' ou 'A'-'Z', identificador)
+(p, 'a'-'z' exceto 'r' ou 'A'-'Z' ou '0'-'9', identificador)
 
 (pr, 'i', pri)
 
-(pr, 'a'-'z' exceto 'i' ou 'A'-'Z', identificador)
+(pr, 'a'-'z' exceto 'i' ou 'A'-'Z' ou '0'-'9', identificador)
 
 (pri, 'n', prin)
 
-(pri, 'a'-'z' exceto 'n' ou 'A'-'Z', identificador)
+(pri, 'a'-'z' exceto 'n' ou 'A'-'Z' ou '0'-'9', identificador)
 
 (prin, 't', print)
 
-(print, 'a'-'z' exceto 't' ou 'A'-'Z', identificador)
+(print, 'a'-'z' exceto 't' ou 'A'-'Z' ou '0'-'9', identificador)
 
-(print, 'a'-'z' ou 'A'-'Z', identificador)
+(print, 'a'-'z' ou 'A'-'Z' ou '0'-'9', identificador)
 
-(i,)
-(if,)
-(e,)
-(el,)
-(els,)
-(else,)
-(t,)
-(th,)
-(the,)
-(then,)
-(identificador,)
-(inteiro,)
-(abre-parentese,)
-(fecha-parentese,)
-(comparador-maior,)
-(operador-soma,)
-(operador-subtracao,)
-(operador, multiplicacao)
-\section{Código}
+(i, 'f', if)
+
+(i, 'a'-'z' exceto 'f', 'A'-'Z' ou '0'-'9', identificador)
+
+(if, 'a'-'z' ou 'A'-'Z' ou '0'-'9', identificador)
+
+(e, 'l', el)
+
+(e, 'a'-'z' ou 'A'-'Z' ou '0'-'9', identificador)
+
+(el, 's', els)
+
+(el, 'a'-'z' ou 'A'-'Z' ou '0'-'9', identificador)
+
+(els, 'e', else)
+
+(els, 'a'-'z' ou 'A'-'Z' ou '0'-'9', identificador)
+
+(else, 'a'-'z' ou 'A'-'Z' ou '0'-'9', identificador)
+
+(t,'h', th)
+
+(t, 'a'-'z' ou 'A'-'Z' ou '0'-'9', identificador)
+
+(th, 'e', the)
+
+(th, 'a'-'z' ou 'A'-'Z' ou '0'-'9', identificador)
+
+(the, 'n', then)
+
+(the, 'a'-'z' ou 'A'-'Z' ou '0'-'9', identificador)
+
+(then, 'a'-'z' ou 'A'-'Z' ou '0'-'9', identificador)
+
+(identificador, 'a'-'z' ou 'A'-'Z' ou '0'-'9', identificador)
+
+(inteiro, '0'-'9', inteiro)
+
+(abre-parentese, -, estado-morto)
+
+(fecha-parentese, -, estado-morto)
+
+(comparador, -, estado-morto)
+
+(operador, -, estado-morto)
+
+(ponto-virgula, -, estado-morto)
+
+\section{Implementação}
+\subsection{Convenções}
+Para facilitar a escrita e o entendimento do código, os estados descritos acima foram codificados como números inteiros da seguinte forma:
+
+\begin{center}
+\begin{tabular} {| l | c |}
+\hline
+Nome do Estado & Inteiro Correspondente \\
+inicio & 0 \\
+p & 1 \\
+pr & 2 \\
+pri & 3 \\
+prin & 4 \\
+print & 5 \\
+i & 6 \\
+if & 7 \\
+t & 8 \\
+th & 9 \\
+the & 10 \\
+then & 11 \\
+e & 12 \\
+el & 13 \\
+els & 14 \\
+else & 15 \\
+identificador & 16 \\
+inteiro & 17 \\
+abre-parentese & 18 \\
+fecha-parentese & 19 \\
+comparador & 20 \\
+operador & 21 \\
+atribuicao & 22 \\
+ponto-virgula & 23 \\
+branco & 24 \\
+estado-morto & -1 \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Código do Autômato}
+Abaixo se encontram as modificações feitas no código já fornecido do analisador léxico para que ele pudesse reconhecer a linguagem descrita mais acima:
+
+\lstinputlisting[caption={Automato reconhecedor da linguagem descrita}]{codigos/analisadorLexico/alteracoes.ml}
+
+\subsection{Reconhecimento do Código}
+Para demonstrar o funcionamento do autômato, será feita a entrada de um exemplo de programa, que foi especificado anteriormente e está novamente listado abaixo:
+
+\begin{terminal}
+b = 2;
+a = 1 + b;
+print (a * b);
+if1 = a - 2;
+if2 = b + 3;
+if if1 > 0
+then print(if1);
+else print(if2);
+\end{terminal}
+
+Para iniciar o Ocaml, ler o arquivo e interpretar um código, os seguintes comandos devem ser especificados no terminal:
+\begin{terminal}
+rlwrap ocaml \\
+#use "dfalexer.ml";;
+lexico "comando";;
+
+exit 0;;
+\end{terminal}
+
+Para testar o exemplo, será feita a entrada do programa como uma única string:
+\begin{terminal}
+#use "dfalexer.ml";;
+lexico "b = 2;\na = 1 + b;\nprint (a * b);\nif1 = a - 2;\nif2 = b + 3;\nif if1 > 0\nthen print(if1);\nelse print(if2);";;
+
+- : token list =
+[Id "b"; Branco; Atribuicao; Branco; Int "2"; PontoVirgula; Branco; Id "a";
+ Branco; Atribuicao; Branco; Int "1"; Branco; Operador "+"; Branco; Id "b";
+ PontoVirgula; Branco; Print; Branco; AbreParentese; Id "a"; Branco;
+ Operador "*"; Branco; Id "b"; FechaParentese; PontoVirgula; Branco;
+ Id "if1"; Branco; Atribuicao; Branco; Id "a"; Branco; Operador "-"; Branco;
+ Int "2"; PontoVirgula; Branco; Id "if2"; Branco; Atribuicao; Branco;
+ Id "b"; Branco; Operador "+"; Branco; Int "3"; PontoVirgula; Branco; If;
+ Branco; Id "if1"; Branco; Comparador ">"; Branco; Int "0"; Branco; Then;
+ Branco; Print; AbreParentese; Id "if1"; FechaParentese; PontoVirgula;
+ Branco; Else; Branco; Print; AbreParentese; Id "if2"; FechaParentese;
+ PontoVirgula; EOF]
+\end{terminal}
+
+Para verificar a corretude do automato, testarei também com um exemplo negativo, por exemplo, trocando o sinal de atribuição de '=' para ':=', o autômato não reconhece ':' e um erro deverá ser retornado:
+
+\begin{terminal}
+#use "dfalexer.ml";;
+lexico "b := 2;\na := 1 + b;\nprint (a * b);\nif1 := a - 2;\nif2 := b + 3;\nif if1 > 0\nthen print(if1);\nelse print(if2);";;
+
+Exception: Failure "Erro lexico: caracter desconhecido :".
+\end{terminal}
+
+
+
+
+
 
 \chapter{Referências}
 [1] Documentação Lua - \url{https://www.lua.org/docs.html}
