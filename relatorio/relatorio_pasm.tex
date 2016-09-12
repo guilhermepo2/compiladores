@@ -629,17 +629,24 @@ Digite um numero: 0
 Zero
 \end{terminal}
 
-\chapter{Analisador Léxico}
-\section{O que é}
+\chapter{Analisador Léxco}
+\section{Análise Léxica}
+
+A Análise Léxica tem como principal objetivo facilitar o entedimento do programa para as análises subsequentes do compilador. Essa análise poderia ser feita juntamente com a análise sintática, mas é feita separada por motivos de eficiência, modularização (facilita manutenção e alterações futuras) e por tradição, as linguagens geralmente são criadas com módulos separados para análise léxica e sintática.
+
+As expressões para a análise geralmente são escritas em expressões regulares, assim, os analisadores léxicos são criados como um automato finito deterministico.
+
+Um Analisador Léxico tem como input uma string correspondente a todo o código digitado, essa string é separada em uma lista de caracteres que subsequentemente é separada em tokens. Após a separação em tokens, é trabalho do analisador verificar a corretude léxica do código bem como rotular corretamente cada token reconhecido.
+
 \section{Linguagem a ser interpretada}
 A linguagem a ser interpretada é uma linguagem simples que reconhece algumas palavras reservadas básicas de todas as linguagens de programação, como: print, if, then, else e comandos como atribuição, soma, subtração e multiplicação, além de reconhecer identificadores e números inteiros, todas as linhas devem ser terminadas com um ponto e vírgula, um exemplo de um programa nessa linguagem:
 
 \begin{terminal}
-b = 2;
-a = 1 + b;
+b := 2;
+a := 1 + b;
 print (a * b);
-if1 = a - 2;
-if2 = b + 3;
+if1 := a - 2;
+if2 := b + 3;
 if if1 > 0
 then print(if1);
 else print(if2);
@@ -651,11 +658,11 @@ O autômato capaz de interpretar a linguagem é um autômato do tipo M = (ALF, Q
 
 ALF = o alfabeto de entrada é qualquer conjunto de palavras sobre o conjunto ASCII 2
 
-Q = {inicio, p, pr, pri, prin, print, i, if, t, th, the, then, e, el, els, else, identificador, inteiro, abre-parentese, fecha-parentese, comparador, operador, atribuicao, ponto-virgula, estado-morto}
+Q = {inicio, p, pr, pri, prin, print, i, if, t, th, the, then, e, el, els, else, identificador, inteiro, abre-parentese, fecha-parentese, comparador, operador, dois-pontos, atribuicao, ponto-virgula, estado-morto}
 
 qo = inicio
 
-F = {print, if, then, else, identificador, inteiro, abre-parentese, fecha-parentese, comparador-maior, operador-soma, operador-subtracao, operator-multiplicacao, atribuicao, ponto-virgula}
+F = {print, if, then, else, identificador, inteiro, abre-parentese, fecha-parentese, comparador, operador, atribuicao, ponto-virgula}
 
 d =
 A função de transição será descrita na forma:
@@ -677,7 +684,7 @@ A função de transição será descrita na forma:
 
 (inicio, '+', '-', '*', operador)
 
-(inicio, ':=', atribuicao)
+(inicio, ':', dois-pontos)
 
 (inicio, ';', ponto-virgula)
 
@@ -741,6 +748,10 @@ A função de transição será descrita na forma:
 
 (inteiro, '0'-'9', inteiro)
 
+(dois-pontos, '=', atribuicao)
+
+(atribuicao, - , estado-morto)
+
 (abre-parentese, -, estado-morto)
 
 (fecha-parentese, -, estado-morto)
@@ -781,9 +792,10 @@ abre-parentese & 18 \\
 fecha-parentese & 19 \\
 comparador & 20 \\
 operador & 21 \\
-atribuicao & 22 \\
+dois-pontos & 22 \\
 ponto-virgula & 23 \\
 branco & 24 \\
+atribuicao & 25 \\
 estado-morto & -1 \\
 \hline
 \end{tabular}
@@ -798,11 +810,11 @@ Abaixo se encontram as modificações feitas no código já fornecido do analisa
 Para demonstrar o funcionamento do autômato, será feita a entrada de um exemplo de programa, que foi especificado anteriormente e está novamente listado abaixo:
 
 \begin{terminal}
-b = 2;
-a = 1 + b;
+b := 2;
+a := 1 + b;
 print (a * b);
-if1 = a - 2;
-if2 = b + 3;
+if1 := a - 2;
+if2 := b + 3;
 if if1 > 0
 then print(if1);
 else print(if2);
@@ -810,7 +822,7 @@ else print(if2);
 
 Para iniciar o Ocaml, ler o arquivo e interpretar um código, os seguintes comandos devem ser especificados no terminal:
 \begin{terminal}
-rlwrap ocaml \\
+rlwrap ocaml
 #use "dfalexer.ml";;
 lexico "comando";;
 
@@ -820,7 +832,7 @@ exit 0;;
 Para testar o exemplo, será feita a entrada do programa como uma única string:
 \begin{terminal}
 #use "dfalexer.ml";;
-lexico "b = 2;\na = 1 + b;\nprint (a * b);\nif1 = a - 2;\nif2 = b + 3;\nif if1 > 0\nthen print(if1);\nelse print(if2);";;
+lexico "b := 2;\na := 1 + b;\nprint (a * b);\nif1 := a - 2;\nif2 := b + 3;\nif if1 > 0\nthen print(if1);\nelse print(if2);";;
 
 - : token list =
 [Id "b"; Branco; Atribuicao; Branco; Int "2"; PontoVirgula; Branco; Id "a";
@@ -836,18 +848,14 @@ lexico "b = 2;\na = 1 + b;\nprint (a * b);\nif1 = a - 2;\nif2 = b + 3;\nif if1 >
  PontoVirgula; EOF]
 \end{terminal}
 
-Para verificar a corretude do automato, testarei também com um exemplo negativo, por exemplo, trocando o sinal de atribuição de '=' para ':=', o autômato não reconhece ':' e um erro deverá ser retornado:
+Para verificar a corretude do automato, testarei também com um exemplo negativo, por exemplo, colocando um @ no meio da string de teste:
 
 \begin{terminal}
 #use "dfalexer.ml";;
-lexico "b := 2;\na := 1 + b;\nprint (a * b);\nif1 := a - 2;\nif2 := b + 3;\nif if1 > 0\nthen print(if1);\nelse print(if2);";;
+lexico "b := 2;\na := 1 @ + b;\nprint (a * b);\nif1 := a - 2;\nif2 := b + 3;\nif if1 > 0\nthen print(if1);\nelse print(if2);";;
 
-Exception: Failure "Erro lexico: caracter desconhecido :".
+Exception: Failure "Erro lexico: caracter desconhecido @".
 \end{terminal}
-
-
-
-
 
 
 \chapter{Referências}
@@ -866,6 +874,8 @@ Exception: Failure "Erro lexico: caracter desconhecido :".
 [7] Opcodes de PASM - \url{http://docs.parrot.org/parrot/latest/html/ops.html}
 
 [8] Parrot Documentation, Exemplos de PASM - \url{http://parrot.org/dev/examples/pasm}
+
+[9] Basics of Copiler Design - Torben Ægidius Mogensen
 
 \clearpage
 \addcontentsline{toc}{part}{Apêndice}

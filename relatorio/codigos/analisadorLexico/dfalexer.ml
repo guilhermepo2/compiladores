@@ -107,7 +107,7 @@ let lexico (str:entrada) =
     | (0, '+') -> 21
     | (0, '-') -> 21
     | (0, '*') -> 21
-    | (0, '=') -> 22
+    | (0, ':') -> 22
     | (0, ';') -> 23
     | (0, _) when eh_letra c -> 16
     | (0, _) when eh_digito c -> 17
@@ -159,6 +159,8 @@ let lexico (str:entrada) =
 
     | (17, _) when eh_digito c -> 17
 
+    | (22, '=') -> 25
+
     | (24, _) when eh_branco c -> 24
     | _ -> estado_morto
  and rotulo e str =
@@ -171,7 +173,7 @@ let lexico (str:entrada) =
   | 19 -> FechaParentese
   | 20 -> Comparador str
   | 21 -> Operador str
-  | 22 -> Atribuicao
+  | 25 -> Atribuicao
   | 23 -> PontoVirgula
   | 1
   | 2
