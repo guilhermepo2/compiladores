@@ -638,7 +638,8 @@ As expressões para a análise geralmente são escritas em expressões regulares
 
 Um Analisador Léxico tem como input uma string correspondente a todo o código digitado, essa string é separada em uma lista de caracteres que subsequentemente é separada em tokens. Após a separação em tokens, é trabalho do analisador verificar a corretude léxica do código bem como rotular corretamente cada token reconhecido.
 
-\section{Linguagem a ser interpretada}
+\section{Analisador Manual}
+\subsection{Linguagem a ser interpretada}
 A linguagem a ser interpretada é uma linguagem simples que reconhece algumas palavras reservadas básicas de todas as linguagens de programação, como: print, if, then, else e comandos como atribuição, soma, subtração e multiplicação, além de reconhecer identificadores e números inteiros, todas as linhas devem ser terminadas com um ponto e vírgula, um exemplo de um programa nessa linguagem:
 
 \begin{terminal}
@@ -653,7 +654,7 @@ else print(if2);
 \end{terminal}
 
 
-\section{Autômato reconhecedor da linguagem}
+\subsection{Autômato reconhecedor da linguagem}
 O autômato capaz de interpretar a linguagem é um autômato do tipo M = (ALF, Q, d, qo, F), onde F é o alfabeto de símbolos de entrada, Q são os estados possíveis do autômato, d é a função de transição, qo é o estado inicial e F é o conjunto de todos os estados finais do autômato.
 
 ALF = o alfabeto de entrada é qualquer conjunto de palavras sobre o conjunto ASCII 2
@@ -762,8 +763,8 @@ A função de transição será descrita na forma:
 
 (ponto-virgula, -, estado-morto)
 
-\section{Implementação}
-\subsection{Convenções}
+\subsection{Implementação}
+\subsubsection{Convenções}
 Para facilitar a escrita e o entendimento do código, os estados descritos acima foram codificados como números inteiros da seguinte forma:
 
 \begin{center}
@@ -801,12 +802,12 @@ estado-morto & -1 \\
 \end{tabular}
 \end{center}
 
-\subsection{Código do Autômato}
+\subsubsection{Código do Autômato}
 Abaixo se encontram as modificações feitas no código já fornecido do analisador léxico para que ele pudesse reconhecer a linguagem descrita mais acima:
 
 \lstinputlisting[caption={Automato reconhecedor da linguagem descrita}]{codigos/analisadorLexico/alteracoes.ml}
 
-\subsection{Reconhecimento do Código}
+\subsubsection{Reconhecimento do Código}
 Para demonstrar o funcionamento do autômato, será feita a entrada de um exemplo de programa, que foi especificado anteriormente e está novamente listado abaixo:
 
 \begin{terminal}
@@ -856,6 +857,73 @@ lexico "b := 2;\na := 1 @ + b;\nprint (a * b);\nif1 := a - 2;\nif2 := b + 3;\nif
 
 Exception: Failure "Erro lexico: caracter desconhecido @".
 \end{terminal}
+
+\section{Analisador com Ocamllexer}
+\subsection{Convenções Léxicas da Linguagem Lua}
+Na documentação oficial da Linguagem Lua, as convenções léxicas podem ser encontradas na Seção 3.1.
+
+Lua ignora espaços brancos, novas linhas e comentários entre elementos léxicos (tokens).
+
+Nomes (identificadores) em Lua podem ser strings de letras, digitos e underscore, não podendo começar com um digito. Identificadores são utilizados para rotular variáveis, tabelas e rótulos.
+
+A Linguagem possui as seguintes palavras reservadas:
+
+\begin{center}
+\begin{tabular} {| c | c | c | c | c | c | }
+\hline
+and & break & do & else & elseif & end \\
+\hline
+false & for & function & goto & if & in \\
+\hline
+local & nil & not & or & repeat & return \\
+\hline
+then & true & until & while & &\\
+\hline
+\end{tabular}
+\end{center}
+
+Lua é caso sensitivo, and é uma palavra reservada, porém AND, And, aNd, etc... podem ser utilizadas como identificadores. Por convenção, identificadores que começam com underscore e são seguidos por letras maiúsculas (como \_VERSION) são variáveis utilizadas pela linguagem
+
+São outros tokens reconhecidos pela linguagem:
+
+
+\begin{center}
+\begin{tabular} {| c | c | c | c | c | c | c |}
+\hline
++ & - & * & / & \% & x & \# \\
+\hline
+==&~=&<=&>=&<&>&=\\
+\hline
+( & ) & \{ & \} & [ & ] & :\\
+\hline
+; & : & , & . & .. & ... & \\
+\hline
+\end{tabular}
+\end{center}
+
+Strings podem ser limitadas por aspas simples ou duplas e pode conter qualquer caractere de escape contido no C:
+
+\begin{terminal}
+ '\a', '\b', '\f', '\n', '\r', '\t', '\v', '\\', '\"' e '\''
+\end{terminal}
+
+Strings em Lua também podem ser criadas utilizando uma notação de colchetes, em n níveis, as seguintes strings são aceitas em lua:
+
+\begin{terminal}
+ [[teste]] [=[teste]=] [==[teste]==] ...
+\end{terminal}
+
+Uma constante numérica pode ser escrita com uma parte fracionária opcional, marcada por 'e' ou 'E'. Lua também aceita constantes hexadecimais, que começam com '0x' ou '0X', e aceitam um complemento binário que vem após um 'p' ou 'P', as seguintes constantes numéricas são aceitas:
+
+\begin{terminal}
+ 3     3.0     3.1416     314.16e-2     0.31416E1
+ 0xff  0x0.1E  0xA23p-4   0X1.921FB54442D18P+1
+\end{terminal}
+
+Um comentário começa com -- fora de uma string, se após os dois hífens não vier um colchete, o comentário é de uma linha, caso contrário, o comentário segue até encontrar um colchete fechando o comentário.
+
+\subsection{Implementação}
+\subsection{Testes}
 
 
 \chapter{Referências}
