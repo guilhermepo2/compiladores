@@ -1,9 +1,9 @@
-#load "lexico.cmo";;
+#load "lualexer.cmo";;
 
 let rec tokens lexbuf =
-  let tok = Lexico.token lexbuf in
+  let tok = Lualexer.token lexbuf in
   match tok with
-  | Lexico.EOF -> [Lexico.EOF]
+  | Lualexer.EOF -> [Lualexer.EOF]
   | _ -> tok :: tokens lexbuf
 ;;
 
