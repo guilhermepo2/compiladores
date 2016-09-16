@@ -1,6 +1,6 @@
 -- Listagem 23: Decide se um numero e positivo, zero ou negativo com o auxilio de uma funcao.
 
---[[ Funcao: recebe um numero e verifica se o numero e positivo, nulo ou negativo com o auxilio de uma funcao --]]
+--[[ Funcao: recebe um numero e verifica se o numero e positivo, nulo ou negativo com o auxilio de uma funcao ]]--
 
 function verifica(n)
 	 if(n > 0)

@@ -22,8 +22,11 @@ type tokens = ABREPARENTESE
 	    | ABRECHAVES
 	    | FECHACHAVES
 	    | DOISPONTOS
+	    | DOISDOISPONTOS
+	    
 	    | PONTOEVIRGULA
 	    | VIRGULA
+	    | QUADRADO
 	    
 	    | PONTO
 	    | PONTOPONTO
@@ -86,6 +89,27 @@ rule token = parse
 | '}'        { FECHACHAVES }
 
 | '+'	     { OPERADOR "+" }
+| '-'	     { OPERADOR "-" }
+| '*'	     { OPERADOR "*" }
+| '/'	     { OPERADOR "/" }
+| '%'	     { OPERADOR "%" }
+| '^'	     { OPERADOR "^" }
+
+| "=="	     { COMPARADOR "==" }
+| "~="	     { COMPARADOR "~=" }
+| ">="	     { COMPARADOR ">=" }
+| "<="	     { COMPARADOR "<=" }
+| '>'	     { COMPARADOR ">" }
+| '<'	     { COMPARADOR "<" }
+
+| '#'          { QUADRADO }
+| ':'	     { DOISPONTOS }
+| "::"	     { DOISDOISPONTOS }
+| ';'	     { PONTOEVIRGULA }
+| ','	     { VIRGULA }
+| '.'	     { PONTO }
+| ".."	     { PONTOPONTO }
+| "..."	     { PONTOPONTOPONTO }
 
 | "="       { ATRIBUICAO }
 | inteiro as num { let numero = int_of_string num in 
@@ -122,6 +146,8 @@ rule token = parse
 and comentario_bloco n = parse
    "]]--"   { if n=0 then token lexbuf 
             else comentario_bloco (n-1) lexbuf }
+| "--]]"    { if n = 0 then token lexbuf
+  	      else comentario_bloco (n-1) lexbuf }
 | "--[["    { comentario_bloco (n+1) lexbuf }
 | _       { comentario_bloco n lexbuf }
 | eof     { failwith "Comentário não fechado" }
