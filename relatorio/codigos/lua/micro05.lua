@@ -9,8 +9,8 @@ do
 	nome = io.read()
 	print("H - Homem ou M - Mulher")
 	sexo = io.read()
-	if(sexo == 'H') then h = h + 1
-	elseif (sexo == 'M') then m = m + 1
+	if(sexo == "H") then h = h + 1
+	elseif (sexo == "M") then m = m + 1
 	else print("Sexo só pode ser H ou M!")
 	end
 end
