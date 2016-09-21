@@ -890,11 +890,11 @@ São outros tokens reconhecidos pela linguagem:
 \begin{center}
 \begin{tabular} {| c | c | c | c | c | c | c |}
 \hline
-+ & - & * & / & \% & x & \# \\
++ & - & * & / & \% & \^{} & \# \\
 \hline
-==&~=&<=&>=&<&>&=\\
+== & \~{}= & <= & >= & < & > & =\\
 \hline
-( & ) & \{ & \} & [ & ] & :\\
+( & ) & \{ & \} & [ & ] & ::\\
 \hline
 ; & : & , & . & .. & ... & \\
 \hline
@@ -923,7 +923,75 @@ Uma constante numérica pode ser escrita com uma parte fracionária opcional, ma
 Um comentário começa com -- fora de uma string, se após os dois hífens não vier um colchete, o comentário é de uma linha, caso contrário, o comentário segue até encontrar um colchete fechando o comentário.
 
 \subsection{Implementação}
+
+A implementação foi feita utilizando Ocaml Lex, uma ferramente própria para desenvolvimento de analisadores léxicos utilizando autômatos finitos, o código implementado está a seguir.
+
+\lstinputlisting[caption={Arquivo do Reconhecedor léxico de Lua}]{codigos/analisadorLexico/lexer/lualexer.mll}
+
+Além disso, é utilizado o arquivo carregador, fornecido em aula, para que se possa testar corretamente o analisador.
+
+\lstinputlisting[caption={Carregador}]{codigos/analisadorLexico/lexer/carregador.ml}
+
 \subsection{Testes}
+
+Para compilar e executar corretamente o Analisador Léxico os seguintes comandos devem ser utilizados:
+
+\begin{terminal}
+ocamllex lualexer.mll
+ocamlc lualexer.ml
+
+rlwrap ocaml
+#use "carregador.ml";;
+\end{terminal}
+
+Para testar todos os tokens, foi escrito o seguinte arquivo de teste:
+
+\lstinputlisting[caption={Teste de Tokens}]{codigos/analisadorLexico/lexer/teste.lua}
+
+Que fornece o seguinte resultado:
+
+\begin{terminal}
+# lex "teste.lua";;
+- : Lualexer.tokens list =
+[Lualexer.INT 2; Lualexer.OPERADOR "+"; Lualexer.INT 2; Lualexer.INT 2;
+ Lualexer.OPERADOR "-"; Lualexer.INT 2; Lualexer.INT 2;
+ Lualexer.OPERADOR "*"; Lualexer.INT 2; Lualexer.INT 2;
+ Lualexer.OPERADOR "/"; Lualexer.INT 2; Lualexer.INT 2;
+ Lualexer.OPERADOR "%"; Lualexer.INT 2; Lualexer.INT 2;
+ Lualexer.OPERADOR "^"; Lualexer.INT 2; Lualexer.INT 2;
+ Lualexer.COMPARADOR "=="; Lualexer.INT 2; Lualexer.INT 2;
+ Lualexer.COMPARADOR "<="; Lualexer.INT 2; Lualexer.INT 2;
+ Lualexer.COMPARADOR ">="; Lualexer.INT 2; Lualexer.INT 2;
+ Lualexer.COMPARADOR "<"; Lualexer.INT 2; Lualexer.INT 2;
+ Lualexer.COMPARADOR ">"; Lualexer.INT 2; Lualexer.INT 1234;
+ Lualexer.INT 23908423; Lualexer.INT 123124; Lualexer.INT 1032490;
+ Lualexer.INT 324932; Lualexer.INT 3294; Lualexer.ID "identificador";
+ Lualexer.ID "m"; Lualexer.ID "n"; Lualexer.ID "i"; Lualexer.ID "j";
+ Lualexer.ID "k"; Lualexer.ID "l"; Lualexer.QUADRADO; Lualexer.DOISPONTOS;
+ Lualexer.DOISDOISPONTOS; Lualexer.PONTOEVIRGULA; Lualexer.VIRGULA;
+ Lualexer.PONTO; Lualexer.PONTOPONTO; Lualexer.PONTOPONTOPONTO;
+ Lualexer.ABREPARENTESE; Lualexer.FECHAPARENTESE; Lualexer.ABRECOLCHETE;
+ Lualexer.FECHACOLCHETE; Lualexer.ABRECHAVES; Lualexer.FECHACHAVES;
+ Lualexer.ATRIBUICAO; Lualexer.AND; Lualexer.BREAK; Lualexer.DO;
+ Lualexer.ELSE; Lualexer.ELSEIF; Lualexer.END; Lualexer.FALSE; Lualexer.FOR;
+ Lualexer.FUNCTION; Lualexer.GOTO; Lualexer.IF; Lualexer.IN; Lualexer.LOCAL;
+ Lualexer.NIL; Lualexer.NOT; Lualexer.OR; Lualexer.REPEAT; Lualexer.RETURN;
+ Lualexer.THEN; Lualexer.TRUE; Lualexer.UNTIL; Lualexer.WHILE;
+ Lualexer.STRING "hello world"; Lualexer.STRING "helloworld123";
+ Lualexer.STRING "hello\\world"; Lualexer.STRING "hello\"aworld";
+ Lualexer.STRING "hello\nworld"; Lualexer.STRING "hello\\\nworld";
+ Lualexer.EOF]
+\end{terminal}
+
+\subsection{Futuras Correções}
+
+O Analisador Léxico ainda não está totalmente de acordo com as regras da linguagem Lua e ainda não fornece algumas informações importantes para o processo de correção do código.
+
+\begin{itemize}
+\item O Analisador implementado é capaz de reconhecer comentários de multiplas linhas aninhados, desde que haja um fechamento correspondente à cada abertura. Isso não é suportado na linguagem Lua.
+\item Quando há um erro Léxico, há um erro ao apontar onde exatamente está o erro, o Analisador desconsidera os comentários e não conta as linhas que ele ocupa.
+\item A Linguagem Lua oferece declaração de strings em níveis, começando com [=[ e terminando em ]=], a quantidade de "=" indica o nível da declaração, isso também não é suportado atualmente pelo analisador.
+\end{itemize}
 
 
 \chapter{Referências}

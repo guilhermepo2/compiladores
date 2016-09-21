@@ -1,8 +1,17 @@
 --[[
 comentario
-de mais de uma
+de mais
+de uma
 linha
-]]--
+]]
+
+--[[
+--[[
+comentario
+aninhado
+]]
+]]
+
 
 -- OPERADORES
 -- soma
@@ -33,13 +42,25 @@ linha
 
 -- inteiro
 1234
+23908423
+123124
+1032490
+324932
+3294
 
 -- identificadores
 identificador
+m
+n
+i
+j
+k
+l
 
--- Esses aqui sao reocnhecidos como tokens em lua, mas nao sei por que
+-- outros tokens em lua
 #
 :
+::
 ;
 ,
 .
@@ -82,8 +103,16 @@ until
 while
 
 -- strings
-"alou"
-"alou123"
-"alou\\na"
-"asf\"as"
-"oie\na"
+"hello world"
+"helloworld123"
+"hello\\world"
+"hello\"aworld"
+"hello\nworld"
+"hello\
+world"
+
+-- invalidos
+
+-- _identificador
+
+-- @

@@ -144,10 +144,8 @@ rule token = parse
 | _ as c  { failwith (msg_erro lexbuf c) }
 | eof        { EOF }
 and comentario_bloco n = parse
-   "]]--"   { if n=0 then token lexbuf 
+   "]]"   { if n=0 then token lexbuf 
             else comentario_bloco (n-1) lexbuf }
-| "--]]"    { if n = 0 then token lexbuf
-  	      else comentario_bloco (n-1) lexbuf }
 | "--[["    { comentario_bloco (n+1) lexbuf }
 | _       { comentario_bloco n lexbuf }
 | eof     { failwith "Comentário não fechado" }
