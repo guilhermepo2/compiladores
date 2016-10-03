@@ -2,13 +2,13 @@
 #load "lexico.cmo";;
 open Sintatico;;
 
-type regras = REGRA_A of tokens
-            | REGRA_B of tokens
-            | REGRA_C of tokens
-            | REGRA_D of tokens
-            | REGRA_E of tokens
-            | REGRA_F of tokens
-            | REGRA_X of tokens
+type regra = REGRA_S_XYZ of regra * regra * regra
+            | REGRA_X_AXB of tokens * regra * tokens
+            | REGRA_Y_CYZCX of tokens * regra * regra * tokens * regra
+            | REGRA_Y_D of tokens
+            | REGRA_Z_EZYE of tokens * regra * regra * tokens
+            | REGRA_Z_F of tokens
+            | REGRA_X_VAZIO
 
 type comando = If of expressao * comando * comando
              | Bloco of comando list
@@ -44,53 +44,45 @@ let rec ntS () =
     A     ->let expx = ntX () in
             let expy = ntY () in
             let expz = ntZ () in
-            REGRA_A A
+            REGRA_S_XYZ(expx, expy, expz)
   | C     ->
              let expx = ntX() in
              let expy = ntY() in
              let expz = ntZ() in
-             REGRA_C C
+             REGRA_S_XYZ(expx, expy, expz)
   | D     ->
              let expx = ntX() in
              let expy = ntY() in
              let expz = ntZ() in
-             REGRA_D D
+             REGRA_S_XYZ(expx, expy, expz)
   | _ -> erro "a, c ou d"
 and ntX () =
     match !tk with
       A -> let _ = consome A in
-           let _ = Printf.printf "a" in
            let cmd = ntX() in
            let _ = consome B in
-           let _ = Printf.printf "b" in
-           REGRA_A A
-    | _ -> REGRA_X VAZIO
+           REGRA_X_AXB (A, cmd, B)
+    | _ -> REGRA_X_VAZIO
 and ntY () =
     match !tk with
         C -> let _ = consome C in
-             let _ = Printf.printf "c" in
              let cmdy = ntY() in
              let cmdz = ntZ() in
              let _ = consome C in
-             let _ = Printf.printf "c" in
              let cmdx = ntX() in
-             REGRA_C C
+             REGRA_Y_CYZCX(C, cmdy, cmdz, C, cmdx)
       | D -> let _ = consome D in
-             let _ = Printf.printf "d" in
-             REGRA_D D
+             REGRA_Y_D D
       | _ -> erro "c ou d"
 and ntZ () =
     match !tk with
         E -> let _ = consome E in
-             let _ = Printf.printf "e" in
              let cmdz = ntZ() in
              let cmdy = ntY() in
              let _ = consome E in
-             let _ = Printf.printf "e" in
-             REGRA_E E
+             REGRA_Z_EZYE (E,cmdz,cmdy,E)
       | F -> let _ = consome F in
-             let _ = Printf.printf "f" in
-             REGRA_F F
+             REGRA_Z_F F
       | _ -> erro "e ou f"
 
 let parser str =
@@ -98,7 +90,7 @@ let parser str =
   prox (); (* inicializa o token *)
   let arv = ntS () in
   match !tk with
-    EOF -> let _ = Printf.printf "Tudo ok!\n" in arv
+    EOF -> let _ = Printf.printf "Ok!\n" in arv
   | _ -> erro "fim da entrada"
 
 

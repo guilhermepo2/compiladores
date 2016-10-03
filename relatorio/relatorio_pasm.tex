@@ -212,20 +212,9 @@ Universidade Federal de Uberlândia
 \setlength{\parskip}{0.15in} % espaçamento entre paragráfos
 
 \chapter{Introdução}
-Este documento foi escrito para documentar o processo de instalação de
-todas as ferramentas necessárias para a construção de um compilador da
-Linguagem Lua para a máquina virtual Parrot, utilizando a linguagem
-Ocaml para fazer a implementação.
+Este documento tem como intenção documentar todo o processo de construção de um compilador para a linguagem de programação Lua para a máquina virtual Parrot utilizando Objective OCaml.
 
-Um segundo objetivo é mostrar uma série de programas simples na
-linguagem Lua e sua versão na linguagem PASM, que é a linguagem
-assembly utilizada pela Parrot, afim de estabelecer um guia sobre a
-saída dos programas que passarão pelo compilador.
-
-Outro objetivo é adquirir conhecimento sobre a linguagem Lua, ter um
-contato inicial com OCaml e conhecer como funciona a máquina virtual
-Parrot, suas linguagens de Assembly e bytecode e de compiladores já
-existentes
+A intenção é cobrir desde os primeiros passos, como instalação das ferramentas até conceitos de compiladores, implementações em OCaml e detalhes técnicos. Dessa forma, espera-se que um leitor seja capaz de replicar os resultados.
 
 O Sistema Operacional utilizado é OS X El Capitain 10.11.6
 
@@ -992,6 +981,41 @@ O Analisador Léxico ainda não está totalmente de acordo com as regras da ling
 \item Quando há um erro Léxico, há um erro ao apontar onde exatamente está o erro, o Analisador desconsidera os comentários e não conta as linhas que ele ocupa.
 \item A Linguagem Lua oferece declaração de strings em níveis, começando com [=[ e terminando em ]=], a quantidade de "=" indica o nível da declaração, isso também não é suportado atualmente pelo analisador.
 \end{itemize}
+
+\chapter{Analisador Sintático}
+
+Um analisador sintático tem como tarefa recombinar os tokens produzidos pela análise léxica e gerar uma estrutura que reflete a estrutura da linguagem, essa estrutura é a àrvore sintática. Além disso, na etapa de Análise Sintática, qualquer texto que viole as regras sintáticas da linguagem deve ser rejeitado.
+
+As linguagens adotadas por linguagens de programação são linguagens livres de contexto, que são interpretadas por autômatos com pilha
+
+\section{Parser Preditivo}
+O paser preditivo é uma implementação para Analisadores Sintáticos que utiliza do método recursivo descendente, pelo método LL1, isto é, a entrada será lida da esquerda para a direita,a  árvore será construída com precedência mais à esquerda e apenas um token da entrada será analisado por vez.
+\subsection{Linguagem Analisada}
+A linguagem a ser analisada pelo Analisador Sintático implementado por um Parser Preditivo é da seguinte forma:\\
+\\
+Símbolos não Terminais = {S, X, Y, Z} \\
+Símbolos Terminais = {a, b, c, d, e, f} \\
+Símbolo Inicial = S \\
+Regras de Produção = \{S -> XYZ; X -> aXb; X -> ; Y -> cYZcX; Y -> d; Z -> eZYe; Z -> f \} \\
+\subsection{Arquivo Sintatico}
+\lstinputlisting[caption={Arquivo Sintático}]{codigos/analisadorSintatico/parserPreditivo/sintatico.mli}
+\subsection{Arquivo Léxico}
+\lstinputlisting[caption={Arquivo Léxico}]{codigos/analisadorSintatico/parserPreditivo/lexico.mll}
+\subsection{Gerador da Arvore Sintática}
+\lstinputlisting[caption={Arvore Sintatica}]{codigos/analisadorSintatico/parserPreditivo/sintaticoArv.ml}
+\subsection{Testes}
+Teste com a palavra "abcdfcf":
+\begin{terminal}
+- : regra =
+REGRA_S_XYZ (REGRA_X_AXB (A, REGRA_X_VAZIO, B),
+ REGRA_Y_CYZCX (C, REGRA_Y_D D, REGRA_Z_F F, C, REGRA_X_VAZIO), REGRA_Z_F F)
+ \end{terminal}
+
+Teste com a palavra "bd", uma palavra que não é reconhecida na linguagem:
+
+\begin{terminal}
+Exception: Failure "Erro: esperava a, c ou d mas encontrei b".
+ \end{terminal}
 
 
 \chapter{Referências}
