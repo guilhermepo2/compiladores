@@ -27,6 +27,9 @@ aninhado
 -- exponenciacao
 2 ^ 2
 
+-- FLOAT
+2.14
+
 -- COMPARADORES
 -- igualdade
 2 == 2
