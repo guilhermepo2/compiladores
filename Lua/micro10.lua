@@ -1,4 +1,4 @@
---Listagem 22: Calcula o fatorial de um numero
+-- Listagem 22: Calcula o fatorial de um numero
 
 --[[ Função: recebe um número e calcula recursivamente o fatorial desse número --]]
 
