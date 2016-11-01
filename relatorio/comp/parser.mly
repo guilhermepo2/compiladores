@@ -62,18 +62,18 @@
 %token <float> FLOAT
 %token EOF
 
-%left ADICAO SUBTRACAO MULTIPLICACAO DIVISAO MODULO
+%left SOMA SUBTRACAO MULTIPLICACAO DIVISAO MODULO
 %left MAIOR MENOR MAIORIGUAL MENORIGUAL IGUALDADE DIFERENTE
 %left OR AND ATRIBUICAO
 %right EXPONENCIACAO
 %nonassoc IN
 
-%start <Ast.tokens> chunk
+%start <unit> chunk
 
 %%
 
 chunk:
-  | block { }
+  | block EOF { }
   ;
 
 block:
@@ -97,6 +97,7 @@ stat:
   | LOCAL namelist atribuicao_explist_rule? { }
   ;
 
+(* AUXILIARES PARA A REGRA STAT *)
 elseif_rule:
   | ELSEIF exp THEN block { }
   ;
@@ -111,6 +112,7 @@ comma_exp_rule:
 atribuicao_explist_rule:
   | ATRIBUICAO explist { }
   ;
+  (* --------------------------- *)
 
 retstat:
   | RETURN explist? PONTOEVIRGULA? { }
@@ -121,12 +123,27 @@ label:
   ;
 
 funcname:
-  | ID (PONTO ID)* (DOISPONTOS ID)? { }
+  | ID ponto_id_rule* doispontos_id_rule? { }
   ;
 
-varlist:
-  | var (VIRGULA var)* { }
+  (* auxiliares para funcname *)
+
+ponto_id_rule:
+  | PONTO ID { }
   ;
+doispontos_id_rule:
+  | DOISPONTOS ID { }
+  ;
+  (* --------------------------- *)
+
+varlist:
+  | var virgula_var_rule* { }
+  ;
+  (* auxiliares var list *)
+virgula_var_rule:
+  | VIRGULA var { }
+  ;
+  (* --------------------------- *)
 
 var:
   | ID
@@ -135,12 +152,22 @@ var:
   ;
 
 namelist:
-  | ID (VIRGULA ID)* { }
+  | ID virgula_id_rule* { }
   ;
+  (* namelist auxiliares *)
+virgula_id_rule:
+  | VIRGULA ID { }
+  ;
+  (* --------------------------- *)
 
 explist:
-  | exp (VIRGULA exp)* { }
+  | exp virgula_exp_rule* { }
   ;
+  (* auxiliar para explist *)
+virgula_exp_rule:
+  | VIRGULA exp { }
+  ;
+  (* --------------------------- *)
 
 exp:
   | NIL { }
@@ -169,7 +196,7 @@ functioncall:
   ;
 
 args:
-  | ABREPARENTESE (explist)? FECHAPARENTESE { }
+  | ABREPARENTESE explist? FECHAPARENTESE { }
   | tableconstructor { }
   | STRING { }
   ;
@@ -179,21 +206,31 @@ functiondef:
   ;
 
 funcbody:
-  | ABREPARENTESE (parlist)? FECHAPARENTESE block END { }
+  | ABREPARENTESE parlist? FECHAPARENTESE block END { }
   ;
 
 parlist:
-  | namelist (VIRGULA PONTOPONTOPONTO)? { }
+  | namelist virgula_tres_pontos_rule? { }
   | PONTOPONTOPONTO { }
   ;
+  (* parlist auxiliar *)
+virgula_tres_pontos_rule:
+  | VIRGULA PONTOPONTOPONTO { }
+  ;
+  (* --------------------------- *)
 
 tableconstructor:
   | ABRECHAVES fieldlist? FECHACHAVES { }
   ;
 
 fieldlist:
-  | field (fieldsep field)* fieldsep? { }
+  | field fieldsep_field_rule* fieldsep? { }
   ;
+  (* auxiliar fieldlist *)
+fieldsep_field_rule:
+  | fieldsep field { }
+  ;
+  (* --------------------------- *)
 
 field:
   | ABRECOLCHETE exp FECHACOLCHETE ATRIBUICAO exp { }
