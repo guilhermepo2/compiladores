@@ -73,7 +73,7 @@
 %%
 
 chunk:
-  | block EOF { }
+  | block; EOF { }
   ;
 
 block:

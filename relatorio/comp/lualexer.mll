@@ -1,4 +1,5 @@
 {
+  open Parser
   open Lexing
   open Printf
 
@@ -15,7 +16,7 @@
     and col = pos.pos_cnum - pos.pos_bol - 1 in
     sprintf "%d:%d: caracter desconhecido %c" lin col c
 
-type tokens = ABREPARENTESE
+(* type tokens = ABREPARENTESE
       | FECHAPARENTESE
 	    | ABRECOLCHETE
 	    | FECHACOLCHETE
@@ -78,6 +79,7 @@ type tokens = ABREPARENTESE
       | FLOAT of float
       | ID of string
       | EOF
+      *)
 }
 
 let digito = ['0' - '9']
@@ -92,8 +94,9 @@ let novalinha = '\r' | '\n' | "\r\n"
 
 let comentario = "-- " [^ '\r' '\n' ]*
 
-rule token = parse
-  brancos    { token lexbuf }
+rule token =
+  parse
+|  brancos    { token lexbuf }
 | novalinha  { incr_num_linha lexbuf; token lexbuf }
 | comentario { token lexbuf }
 | "--[["       { comentario_bloco 0 lexbuf }
