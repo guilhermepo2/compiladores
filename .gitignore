@@ -1,4 +1,5 @@
 compiladorLua/_build/
+relatorio/comp/_build/
 *.out
 *.cmi
 *.cmo
