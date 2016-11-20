@@ -2,6 +2,8 @@
 
 --[[ Função: recebe um número e calcula recursivamente o fatorial desse número --]]
 
+WHILE WHILE
+
 function fatorial(n)
 	 if(n <= 0)
 	 then return 1

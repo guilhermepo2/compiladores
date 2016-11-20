@@ -1,7 +1,9 @@
 {
-  open Parser
+  open Sintatico
   open Lexing
   open Printf
+
+  exception Erro of string
 
   let incr_num_linha lexbuf =
     let pos = lexbuf.lex_curr_p in
@@ -161,14 +163,14 @@ rule token =
 | '"'        { let buffer = Buffer.create 1 in
                let str = leia_string buffer lexbuf in
                 STRING str }
-| _ as c  { failwith (msg_erro lexbuf c) }
+| _ as c  { (raise (Erro (msg_erro lexbuf c))) }
 | eof        { EOF }
 and comentario_bloco n = parse
    "]]"   { if n=0 then token lexbuf
             else comentario_bloco (n-1) lexbuf }
 | "--[["    { comentario_bloco (n+1) lexbuf }
 | _       { comentario_bloco n lexbuf }
-| eof     { failwith "Comentário não fechado" }
+| eof     { raise (Erro ("Comentario não foi fechado")) }
 and leia_string buffer = parse
    '"'    { Buffer.contents buffer}
 | "\\t"   { Buffer.add_char buffer '\t'; leia_string buffer lexbuf }
@@ -176,4 +178,4 @@ and leia_string buffer = parse
 | '\\' '"'  { Buffer.add_char buffer '"'; leia_string buffer lexbuf }
 | '\\' '\\'  { Buffer.add_char buffer '\\'; leia_string buffer lexbuf }
 | _ as c    { Buffer.add_char buffer c; leia_string buffer lexbuf }
-| eof     { failwith "A string não foi fechada"}
+| eof     { raise (Erro ("A string nao foi fechada")) }
