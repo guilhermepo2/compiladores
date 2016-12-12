@@ -1,0 +1,2 @@
+lexico:
+	ocamlbuild testeLexico.byte
