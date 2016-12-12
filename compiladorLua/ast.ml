@@ -1,37 +1,49 @@
 (* The type of the abstract syntax tree (AST). *)
-type programa = Programa of bloco
-and bloco = Bloco of stat_list * retstat_option
 
-and stat_list = stat list
-and stat =
+type ident = string
+type 'a pos =  'a * Lexing.position (* tipo e posição no arquivo fonte *)
+
+type 'expr programa = Programa of 'expr bloco
+and 'expr bloco = Bloco of ('expr stat_list) * ('expr retstat_option)
+
+(* REFERENTES AO ANALISADOR SEMANTICO *)
+
+and tipo = TipoNumber
+         | TipoString
+         | TipoBool
+         | TipoNil
+         | TipoFunction
+
+and 'expr stat_list = ('expr stat) list
+and 'expr stat =
         | Stat of string
         | PontoeVirgula
         | Break
-        | Atribuicao of varlist * explist
-        | StatFunctionCall of functioncall
-        | FunctionDefinition of funcname * funcbody
-        | If of exp * bloco * elseif list * else_r option
-        | StatBloco of bloco
+        | Atribuicao of ('expr varlist) * ('expr explist)
+        | StatFunctionCall of ('expr functioncall)
+        | FunctionDefinition of funcname * ('expr funcbody)
+        | If of ('expr exp) * ('expr bloco) * ('expr elseif) list * ('expr else_r) option
+        | StatBloco of ('expr bloco)
         | StatLabel of label
         | Goto of string
-        | Local of namelist * atribuicao_explist_rule option
-        | While of exp * bloco
-        | Repeat of bloco * exp
-        | Forlist of namelist * explist * bloco
-        | For of string * exp * exp * comma_exp_rule option * bloco
+        | Local of namelist * ('expr atribuicao_explist_rule) option
+        | While of ('expr exp) * ('expr bloco)
+        | Repeat of ('expr bloco) * ('expr exp)
+        | Forlist of namelist * ('expr explist) * ('expr bloco)
+        | For of string * ('expr exp) * ('expr exp) * ('expr comma_exp_rule) option * ('expr bloco)
 
-and elseif = Elseif of exp * bloco
-and else_r = Else of bloco
+and 'expr elseif = Elseif of ('expr exp) * ('expr bloco)
+and 'expr else_r = Else of ('expr bloco)
 and label = Label of string
-and atribuicao_explist_rule = Atribuicao of explist
-and comma_exp_rule = Virgula of exp
+and 'expr atribuicao_explist_rule = Atribuicao of ('expr explist)
+and 'expr comma_exp_rule = Virgula of ('expr exp)
 
-and varlist = Varlist of var * variavel list
-and variavel = Variavel of var
-and var =
+and 'expr varlist = Varlist of ('expr var) * ('expr variavel) list
+and 'expr variavel = Variavel of ('expr var)
+and 'expr var =
       | Identificador of string
-      | SeparadoPonto of prefixexp * string
-      | VarCol of prefixexp * exp
+      | SeparadoPonto of ('expr prefixexp) * string
+      | VarCol of ('expr prefixexp) * ('expr exp)
 
 and funcname = FuncName of string * ponto_id_rule list * doispontos_id_rule option
 
@@ -43,60 +55,60 @@ and name = Name of string
 and virgula_tres_pontos_rule = VirgulaPPP
 
 
-and explist = Explist of exp * expaux list
-and expaux = Expression of exp
-and exp =
+and 'expr explist = Explist of ('expr exp) * ('expr expaux) list
+and 'expr expaux = Expression of ('expr exp)
+and 'expr exp =
       | Nil
       | True
       | False
       | Int of int
       | Float of float
       | String of string
-      | ExpVar of var
-      | ExpFunctioncall of functioncall
-      | ExpPrefixExp of prefixexp
-      | ExpAExpF of exp
+      | ExpVar of ('expr var)
+      | ExpFunctioncall of ('expr functioncall)
+      | ExpPrefixExp of ('expr prefixexp)
+      | ExpAExpF of ('expr exp)
       | Exp of string
-      | ExpBinop of binop * exp * exp
-      | ExpUnop of unop * exp
+      | ExpBinop of binop * ('expr exp) * ('expr exp)
+      | ExpUnop of unop * ('expr exp)
       | Pontopontoponto
-      | FunctionDef of functiondef
-      | TableConstructor of tableconstructor
+      | FunctionDef of ('expr functiondef)
+      | TableConstructor of ('expr tableconstructor)
 
-and functiondef = FunctionDef of funcbody
-and funcbody = FuncBody of parlist option * bloco
+and 'expr functiondef = FunctionDef of ('expr funcbody)
+and 'expr funcbody = FuncBody of parlist option * ('expr bloco)
 and parlist =
     | NameListVirgula of namelist * virgula_tres_pontos_rule option
     | Pontopontoponto
 
-and prefixexp =
-      | PrefixExpVar of var
-      | PrefixExpFunctionCall of functioncall
-      | PrefixExpParentese of exp
+and 'expr prefixexp =
+      | PrefixExpVar of ('expr var)
+      | PrefixExpFunctionCall of ('expr functioncall)
+      | PrefixExpParentese of ('expr exp)
 
-and functioncall =
-      | FunctionCallPA of prefixexp * args
-      | PrefixoDoisPontosIdArgs of prefixexp * string * args
+and 'expr functioncall =
+      | FunctionCallPA of ('expr prefixexp) * ('expr args)
+      | PrefixoDoisPontosIdArgs of ('expr prefixexp) * string * ('expr args)
 
-and args =
-      | ArgsExp of explist option
+and 'expr args =
+      | ArgsExp of ('expr explist) option
       | Args of string
-      | TableConstructor of tableconstructor
+      | TableConstructor of ('expr tableconstructor)
 
-and tableconstructor = FieldList of fieldlist option
-and fieldlist = FieldLists of field * fieldsep_field_rule list * fieldsep option
-and fieldsep_field_rule = FieldSepField of fieldsep*field
-and field =
-      | Campo1 of exp * exp
-      | Campo2 of string * exp
-      | Campo3 of exp
+and 'expr tableconstructor = FieldList of ('expr fieldlist) option
+and 'expr fieldlist = FieldLists of ('expr field) * ('expr fieldsep_field_rule) list * fieldsep option
+and 'expr fieldsep_field_rule = FieldSepField of fieldsep * ('expr field)
+and 'expr field =
+      | Campo1 of ('expr exp) * ('expr exp)
+      | Campo2 of string * ('expr exp)
+      | Campo3 of ('expr exp)
 and fieldsep =
       | Virgula
       | PontoEVirgula
 
-and retstat_option = retstat option
-and retstat =
-        | Retorno of explist option
+and 'expr retstat_option = ('expr retstat) option
+and 'expr retstat =
+        | Retorno of ('expr explist) option
 
 and binop =
         | Soma

@@ -62,7 +62,7 @@
 %token <float> FLOAT
 %token EOF
 
-%start <Ast.programa> chunk
+%start <Sast.expressao Ast.programa> chunk
 
 %%
 

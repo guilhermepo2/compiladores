@@ -5,3 +5,6 @@ msg:
 
 build:
 	ocamlbuild -use-ocamlfind -use-menhir -menhir "menhir --table" -package menhirLib sintaticoTest.byte
+
+semantico:
+	ocamlbuild -r -use-ocamlfind -use-menhir -menhir "menhir --table" -package menhirLib semanticoTest.byte
