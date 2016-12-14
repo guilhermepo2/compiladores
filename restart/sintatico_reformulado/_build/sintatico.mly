@@ -70,96 +70,88 @@
 %%
 
 chunk:
-  | b=block EOF { BLOCO }
+  | b=block EOF { Programa(b) }
   ;
 
 block:
-  | s=stat* r=retstat? { }
+  | s=stat* r=retstat? { Bloco(s,r) }
   ;
 
 (* stat = comandos *)
 stat:
-  | PONTOEVIRGULA { }                                                               (* PONTO E VIRGULA *)
-  | esq=expressao ATRIBUICAO dir=expressao { }                                            (* ATRIBUICAO *)
-  | f=functioncall { }                                                              (* CHAMADA DE FUNCAO *)
-  (* | BREAK { }                                                                       (* BREAK *) *)
+  | esq=expressao ATRIBUICAO dir=expressao { CmdAttrib(esq,dir) }                        (* ATRIBUICAO *)
+
+  | f=functioncall { ChamadaFuncao(f) }                                                              (* CHAMADA DE FUNCAO *)
 
   (* IMPRIMIR NA TELA *)
-  | WRITE ABREPARENTESE e=expressao FECHAPARENTESE { }
+  | WRITE ABREPARENTESE e=expressao FECHAPARENTESE { Escrever(e) }
 
+  (* WHILE *)
   | WHILE ABREPARENTESE e=expressao FECHAPARENTESE
     DO
     b=block
-    END { }                                                  (* WHILE *)
+    END { While(e,b) }
 
   | IF ABREPARENTESE e=expressao FECHAPARENTESE
     THEN
     entao=block
-    senao=option(ELSE senaoentao=block { })
-    END { }
-
-  (* FOR *)
-  | FOR e=expressao ATRIBUICAO dir=expressao VIRGULA vai_ate=expressao incremento=expressao
-  DO
-  b = block
-  END { }
+    senao=option(ELSE senaoentao=block { Else(senaoentao) })
+    END { If(e, entao, senao) }
 
   (* CRIACAO DE FUNCAO *)
   | FUNCTION funcname=ID ABREPARENTESE args=separated_list(VIRGULA,expressao) FECHAPARENTESE
       b = block
-    END {  }
-  (* | LOCAL n=namelist a=atribuicao_explist_rule? { }                                 (* VARIAVEL LOCAL *) *)
+    END { Funcao(funcname, args, b) }
   ;
 
 functioncall:
-  nome_fun=ID ABREPARENTESE args=separated_list(VIRGULA, expressao) FECHAPARENTESE { }
+  nome_fun=ID ABREPARENTESE args=separated_list(VIRGULA, expressao) FECHAPARENTESE { Chamada(nome_fun, args) }
 
 (* retstat = retorno do stat *)
 retstat:
-  | RETURN e=expressao? PONTOEVIRGULA? {  }        (* Retorna uma lista de expressoes *)
+  | RETURN e=expressao? PONTOEVIRGULA? { Retorno(e) }        (* Retorna uma lista de expressoes *)
   ;
 
 (* DEFINICAO DE EXPRESSAO *)
 expressao:
-  | v=variavel { }
-  | i=INT { }
-  | f=FLOAT { }
-  | s=STRING { }
-  | e1=expressao b=binop e2=expressao { }
-  | u=unop e=expressao { }  (* UMA EXPRESSAO PODE SER ALGO COM UM OPERADOR UNARIO *)
-  | ABREPARENTESE e=expressao FECHAPARENTESE { }  (* Uma expressao pode ser uma expressao entre parenteses *)
-  | f=functioncall { } (* CHAMADA DE FUNCAO *)
+  | v=variavel { Variavel v }
+  | i=INT { Int i }
+  | f=FLOAT { Float f }
+  | s=STRING { String s }
+  | e1=expressao b=binop e2=expressao { BinOp(e1,b,e2) }
+  | u=unop e=expressao { UnOp(u,e) }  (* UMA EXPRESSAO PODE SER ALGO COM UM OPERADOR UNARIO *)
+  | ABREPARENTESE e=expressao FECHAPARENTESE { e }  (* Uma expressao pode ser uma expressao entre parenteses *)
+
+  | f=functioncall { ExpChamada(f) } (* CHAMADA DE FUNCAO *)
 
   (* LER INPUT *)
-  | READ ABREPARENTESE e=expressao FECHAPARENTESE { }
+  | READ ABREPARENTESE e=expressao FECHAPARENTESE { Leitura }
   ;
 
 variavel:
-  | x=ID { }
+  | x=ID { VarSimples x }
   ;
 
 
 (* OPERADORES *)
 binop:
-  | SOMA { }                                                                   (* OK *)
-  | SUBTRACAO { }                                                         (* OK *)
-  | MULTIPLICACAO {  }                                                 (* OK *)
-  | DIVISAO {  }                                                             (* OK *)
-  | EXPONENCIACAO {  }                                                 (* OK *)
-  | MODULO {  }                                                               (* OK *)
-  | PONTOPONTO {  }                                                       (* OK *)
-  | MENOR {  }                                                                 (* OK *)
-  | MENORIGUAL {  }                                                       (* OK *)
-  | MAIOR {  }                                                                 (* OK *)
-  | MAIORIGUAL {  }                                                       (* OK *)
-  | IGUALDADE {  }                                                         (* OK *)
-  | DIFERENTE {  }                                                         (* OK *)
-  | AND {  }                                                                     (* OK *)
-  | OR {  }                                                                       (* OK *)
+  | SOMA { Soma }                                                                   (* OK *)
+  | SUBTRACAO { Subtracao }                                                         (* OK *)
+  | MULTIPLICACAO { Multiplicacao  }                                                 (* OK *)
+  | DIVISAO { Divisao  }                                                             (* OK *)
+  | EXPONENCIACAO { Exponenciacao  }                                                 (* OK *)
+  | MODULO { Modulo  }                                                               (* OK *)
+  | MENOR { Menor }                                                                 (* OK *)
+  | MENORIGUAL { MenorIgual  }                                                       (* OK *)
+  | MAIOR { Maior }                                                                 (* OK *)
+  | MAIORIGUAL { MaiorIgual }                                                       (* OK *)
+  | IGUALDADE { Igualdade }                                                         (* OK *)
+  | DIFERENTE { Diferente }                                                         (* OK *)
+  | AND { And }                                                                     (* OK *)
+  | OR { Or }                                                                       (* OK *)
   ;
 
 unop:
-  | SUBTRACAO {  }                                                        (* OK *)
-  | NOT {  }                                                                     (* OK *)
-  | QUADRADO {  }                                                           (* OK *)
+  | SUBTRACAO { Negativo }
+  | NOT { Not }
   ;

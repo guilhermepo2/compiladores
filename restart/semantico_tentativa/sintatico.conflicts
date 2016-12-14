@@ -1,0 +1,91 @@
+
+** Conflict (shift/reduce) in state 65.
+** Token involved: SUBTRACAO
+** This state is reached from chunk after reading:
+
+expressao ATRIBUICAO expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+chunk 
+block EOF 
+list(stat) option(retstat) 
+(?)
+
+** In state 65, looking ahead at SUBTRACAO, shifting is permitted
+** because of the following sub-derivation:
+
+stat list(stat) 
+expressao ATRIBUICAO expressao 
+                     expressao binop expressao 
+                               . SUBTRACAO 
+
+** In state 65, looking ahead at SUBTRACAO, reducing production
+** stat -> expressao ATRIBUICAO expressao 
+** is permitted because of the following sub-derivation:
+
+stat list(stat) // lookahead token appears because list(stat) can begin with SUBTRACAO
+expressao ATRIBUICAO expressao . 
+
+** Conflict (shift/reduce) in state 30.
+** Tokens involved: SUBTRACAO SOMA OR MULTIPLICACAO MODULO MENORIGUAL MENOR MAIORIGUAL MAIOR IGUALDADE EXPONENCIACAO DIVISAO DIFERENTE AND
+** The following explanations concentrate on token SUBTRACAO.
+** This state is reached from chunk after reading:
+
+expressao binop expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+chunk 
+block EOF 
+list(stat) option(retstat) 
+stat list(stat) 
+expressao ATRIBUICAO expressao 
+(?)
+
+** In state 30, looking ahead at SUBTRACAO, shifting is permitted
+** because of the following sub-derivation:
+
+expressao binop expressao 
+                expressao binop expressao 
+                          . SUBTRACAO 
+
+** In state 30, looking ahead at SUBTRACAO, reducing production
+** expressao -> expressao binop expressao 
+** is permitted because of the following sub-derivation:
+
+expressao binop expressao // lookahead token appears because binop can begin with SUBTRACAO
+expressao binop expressao . 
+
+** Conflict (shift/reduce) in state 14.
+** Tokens involved: SUBTRACAO SOMA OR MULTIPLICACAO MODULO MENORIGUAL MENOR MAIORIGUAL MAIOR IGUALDADE EXPONENCIACAO DIVISAO DIFERENTE AND
+** The following explanations concentrate on token SUBTRACAO.
+** This state is reached from chunk after reading:
+
+unop expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+chunk 
+block EOF 
+list(stat) option(retstat) 
+stat list(stat) 
+expressao ATRIBUICAO expressao 
+(?)
+
+** In state 14, looking ahead at SUBTRACAO, shifting is permitted
+** because of the following sub-derivation:
+
+unop expressao 
+     expressao binop expressao 
+               . SUBTRACAO 
+
+** In state 14, looking ahead at SUBTRACAO, reducing production
+** expressao -> unop expressao 
+** is permitted because of the following sub-derivation:
+
+expressao binop expressao // lookahead token appears because binop can begin with SUBTRACAO
+unop expressao . 

@@ -1017,6 +1017,76 @@ Teste com a palavra "bd", uma palavra que não é reconhecida na linguagem:
 Exception: Failure "Erro: esperava a, c ou d mas encontrei b".
  \end{terminal}
 
+ \section{Análise Sintática com Menhir}
+
+ Menhir é um gerador de Parsers LR(1) para Linguagem de Programação OCaml. Para instalar o Menhir basta entrar com o comando do homebrew:
+
+ \begin{terminal}
+brew install opam
+brew install menhir
+ \end{terminal}
+
+ Além disso, também é utilizado menhirLib, ocamlfind e ocamlbuild para compilar todos os arquivos necessários, para obter esses arquivos o comando é:
+
+ \begin{terminal}
+opam init
+opam install menhirLib
+opam install ocamlfind
+opam install ocamlbuild
+eval `opam config env`
+ \end{terminal}
+
+ \subsection{Arquivo Ocamlinit}
+
+ O Arquivo Ocamlinit é um arquivo que deve ser nomeado como ".ocamlinit" e ele é executado toda vez que o Ocaml é inicializado. Ele é útil para importar automaticamente todas as dependências necessárias.
+
+ \subsection{Tipos de Parser}
+
+ Um parser analisa uma sequêcia de entrada e verifica se a entrada está de acordo com a linguagem descrita.
+
+ \subsubsection{LL(1)}
+
+ O Parser LL(1) é um analisador sintático descendente que lê entrada da esquerda para a direita e gerar uma derivação mais à esquerda, por isso é chamdo de LL (left-left do inglês). O "1" significa que o parser utiliza apenas um token por vez.
+
+ \subsubsection{LR(1)}
+
+ O Parser LR(1) também utiliza apenas um token para a predição, lê a entrada da esquerda para a direita e produz uma derivação mais a direita, por isso o nome LR (left-right do inglês).
+
+
+ \subsection{Análise Sintática Linguagem Lua}
+
+
+ \lstinputlisting[caption={Regras da linguagem Lua no Menhir}]{codigos/analisadorSintatico/sintaticoLua/sintatico.mly}
+
+ \lstinputlisting[caption={Arvore Sintática}]{codigos/analisadorSintatico/sintaticoLua/ast.ml}
+
+ Arquivo Makefile com os comandos necessários para compilar os arquivos e gerar as mensagens de erro:
+
+ \lstinputlisting[caption={Makefile}]{codigos/analisadorSintatico/sintaticoLua/Makefile}
+
+ Erros: gera os erros possíveis do automato e fornece o espaço para colocar as devidas mensagens de erro que vai ser demonstrada no compilador.
+
+ Env: configura o ambiente ocaml para que a compilação seja bem sucedida
+
+ Msg: Comando menhir para usar o arquivo de mensagens e gerar um arquivo Ocaml que relaciona uma falha com a sua respectiva mensagem
+
+ Build: Comando Ocaml que vai compilar o arquivo teste e todas as dependências necessárias.
+
+ \subsection{Futuras correções}
+ \subsubsection{Geração da Arvore}
+ A geração da árvore está muito "poluida", idealmente ela deve ser mais simples para facilitar as próximas etapas do compilador.
+ \subsubsection{Mensagens de Erro}
+ As mensagens de erro devem ser significativas para o programador, elas devem ser reformuladas.
+
+ \subsection{Testes}
+ Para realizar os testes com o analisador da linguagem Lua é necessário entrar com os comandos:
+
+ \begin{terminal}
+make build
+rlwrap ocaml
+# parser_arq "diretorio";;
+ \end{terminal}
+
 
 \chapter{Referências}
 [1] Documentação Lua - \url{https://www.lua.org/docs.html}
