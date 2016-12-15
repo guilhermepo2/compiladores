@@ -15,15 +15,6 @@ begin
 end
 
 begin
--- numero = "string"
--- if("string1" >= "stirng2")
--- then
---  print("Comparacao de string!")
--- end
--- numero = var
--- numero = (2 > 3)
--- x = (0 == 0)
--- c = "string"
 
 print("Digite um numero: ")
 numero = io.read()

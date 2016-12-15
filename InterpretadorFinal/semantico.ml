@@ -66,7 +66,7 @@ let mesmo_tipo pos msg tinf tdec =
 let rec infere_exp amb exp =
   match exp with
     S.ExpInt n    -> (T.ExpInt (fst n, A.TipoInt),       A.TipoInt)
-  | S.ExpFloat n    -> (T.ExpFloat (fst n, A.TipoFloat),       A.TipoFloat)
+  | S.ExpFloat n    -> (T.ExpFloat (fst n, A.Tipo'Float'),       A.TipoFloat)
   | S.ExpString s -> (T.ExpString (fst s, A.TipoString), A.TipoString)
   | S.ExpBool b   -> (T.ExpBool (fst b, A.TipoBool),     A.TipoBool)
   | S.ExpVar v ->

@@ -22,15 +22,15 @@ let message =
     | 49 ->
         "Esperava um '('\n"
     | 50 ->
-        "Esperava uma expressão\n"
+        "Esperava uma expressão valida\n"
     | 99 ->
         "Esperava um operador binário ou um ')'\n"
     | 100 ->
-        "Esperava a palavra chave 'DO'\n"
+        "Esperava a palavra chave 'do'\n"
     | 101 ->
         "Esperava uma lista de comandos.\n"
     | 156 ->
-        "Esperava uma lista de comandos após BEGIN\n"
+        "Esperava uma lista de comandos após begin\n"
     | 128 ->
         "Operação Inválida, após uma expressão faça uma atribuição, utilize um operador binário ou separe por virgula caso esteja chamando ou declarando uma função.\n"
     | 97 ->
@@ -180,19 +180,19 @@ let message =
     | 28 ->
         "Esperava por um registro\n"
     | 153 ->
-        "Esperava por declaração de variaveis\n"
+        "Esperava por uma declaração de variavel\n"
     | 13 ->
         "Esperava por um '['\n"
     | 14 ->
         "Esperava algo após o '['\n"
     | 15 ->
-        "Erro na declaração do arranjo depois de '['\n"
+        "Erro um .. \n"
     | 16 ->
         "Erro na declaração de arranjo, esperava um inteiro\n"
     | 18 ->
         "Esperava um ']'\n"
     | 19 ->
-        "Esperava pela declaração do tipo do arranjo\n"
+        "Esperava a palavra reservada \"de\".\n"
     | 20 ->
         "Esperava pela declaração do tipo do arranjo\n"
     | 33 ->
