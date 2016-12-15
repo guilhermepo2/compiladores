@@ -1,6 +1,6 @@
 ### Starting build.
 # Target: interpreteTeste.ml.depends, tags: { extension:ml, file:interpreteTeste.ml, ocaml, ocamldep, package(menhirLib), quiet }
-ocamlfind ocamldep -package menhirLib -modules interpreteTeste.ml > interpreteTeste.ml.depends # cached
+ocamlfind ocamldep -package menhirLib -modules interpreteTeste.ml > interpreteTeste.ml.depends
 # Target: ast.ml.depends, tags: { extension:ml, file:ast.ml, ocaml, ocamldep, package(menhirLib), quiet }
 ocamlfind ocamldep -package menhirLib -modules ast.ml > ast.ml.depends # cached
 # Target: ast.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:ast.cmo, file:ast.ml, implem, ocaml, package(menhirLib), quiet }
@@ -40,7 +40,12 @@ ocamlfind ocamlc -c -package menhirLib -o ambiente.cmi ambiente.mli # cached
 # Target: semantico.cmi, tags: { byte, compile, extension:mli, file:semantico.mli, interf, ocaml, package(menhirLib), quiet }
 ocamlfind ocamlc -c -package menhirLib -o semantico.cmi semantico.mli # cached
 # Target: interpreteTeste.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:interpreteTeste.cmo, file:interpreteTeste.ml, implem, ocaml, package(menhirLib), quiet }
-ocamlfind ocamlc -c -package menhirLib -o interpreteTeste.cmo interpreteTeste.ml # cached
+ocamlfind ocamlc -c -package menhirLib -o interpreteTeste.cmo interpreteTeste.ml
++ ocamlfind ocamlc -c -package menhirLib -o interpreteTeste.cmo interpreteTeste.ml
+File "interpreteTeste.ml", line 300, characters 4-7:
+Warning 40: EOF was selected from type Sintatico.token.
+It is not visible in the current scope, and will not 
+be selected if the type becomes unknown.
 # Target: interprete.ml.depends, tags: { extension:ml, file:interprete.ml, ocaml, ocamldep, package(menhirLib), quiet }
 ocamlfind ocamldep -package menhirLib -modules interprete.ml > interprete.ml.depends # cached
 # Target: ambInterp.mli.depends, tags: { extension:mli, file:ambInterp.mli, ocaml, ocamldep, package(menhirLib), quiet }
@@ -74,5 +79,5 @@ ocamlfind ocamldep -package menhirLib -modules ambiente.ml > ambiente.ml.depends
 # Target: ambiente.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:ambiente.cmo, file:ambiente.ml, implem, ocaml, package(menhirLib), quiet }
 ocamlfind ocamlc -c -package menhirLib -o ambiente.cmo ambiente.ml # cached
 # Target: interpreteTeste.byte, tags: { byte, dont_link_with, extension:byte, file:interpreteTeste.byte, link, ocaml, package(menhirLib), program, quiet }
-ocamlfind ocamlc -linkpkg -package menhirLib ast.cmo tabsimb.cmo tast.cmo ambInterp.cmo sast.cmo interprete.cmo sintatico.cmo lexico.cmo ambiente.cmo semantico.cmo interpreteTeste.cmo -o interpreteTeste.byte # cached
+ocamlfind ocamlc -linkpkg -package menhirLib ast.cmo tabsimb.cmo tast.cmo ambInterp.cmo sast.cmo interprete.cmo sintatico.cmo lexico.cmo ambiente.cmo semantico.cmo interpreteTeste.cmo -o interpreteTeste.byte
 # Compilation successful.

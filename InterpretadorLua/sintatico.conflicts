@@ -1,0 +1,456 @@
+
+** Conflict (shift/reduce) in state 111.
+** Tokens involved: STRING INT ID FLOAT BOOL APAR
+** The following explanations concentrate on token STRING.
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO RETORNE 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               (?)
+
+** In state 111, looking ahead at STRING, shifting is permitted
+** because of the following sub-derivation:
+
+comando list(comando) 
+comando_retorno 
+RETORNE option(expressao) 
+        expressao 
+        . STRING 
+
+** In state 111, looking ahead at STRING, reducing production
+** option(expressao) -> 
+** is permitted because of the following sub-derivation:
+
+comando list(comando) // lookahead token appears because list(comando) can begin with STRING
+comando_retorno // lookahead token is inherited
+RETORNE option(expressao) // lookahead token is inherited
+        . 
+
+** Conflict (shift/reduce) in state 89.
+** Tokens involved: MENORIGUAL MAIORIGUAL
+** The following explanations concentrate on token MENORIGUAL.
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO expressao DIFER expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               comando list(comando) 
+                                                               comando_atribuicao 
+                                                               expressao ATRIB expressao 
+                                                               (?)
+
+** In state 89, looking ahead at MENORIGUAL, shifting is permitted
+** because of the following sub-derivation:
+
+expressao DIFER expressao 
+                expressao . MENORIGUAL expressao 
+
+** In state 89, looking ahead at MENORIGUAL, reducing production
+** expressao -> expressao DIFER expressao 
+** is permitted because of the following sub-derivation:
+
+expressao MENORIGUAL expressao // lookahead token appears
+expressao DIFER expressao . 
+
+** Conflict (shift/reduce) in state 87.
+** Tokens involved: MENORIGUAL MAIORIGUAL
+** The following explanations concentrate on token MENORIGUAL.
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO expressao ELOG expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               comando list(comando) 
+                                                               comando_atribuicao 
+                                                               expressao ATRIB expressao 
+                                                               (?)
+
+** In state 87, looking ahead at MENORIGUAL, shifting is permitted
+** because of the following sub-derivation:
+
+expressao ELOG expressao 
+               expressao . MENORIGUAL expressao 
+
+** In state 87, looking ahead at MENORIGUAL, reducing production
+** expressao -> expressao ELOG expressao 
+** is permitted because of the following sub-derivation:
+
+expressao MENORIGUAL expressao // lookahead token appears
+expressao ELOG expressao . 
+
+** Conflict (shift/reduce) in state 85.
+** Tokens involved: MENORIGUAL MAIORIGUAL
+** The following explanations concentrate on token MENORIGUAL.
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO expressao IGUAL expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               comando list(comando) 
+                                                               comando_atribuicao 
+                                                               expressao ATRIB expressao 
+                                                               (?)
+
+** In state 85, looking ahead at MENORIGUAL, shifting is permitted
+** because of the following sub-derivation:
+
+expressao IGUAL expressao 
+                expressao . MENORIGUAL expressao 
+
+** In state 85, looking ahead at MENORIGUAL, reducing production
+** expressao -> expressao IGUAL expressao 
+** is permitted because of the following sub-derivation:
+
+expressao MENORIGUAL expressao // lookahead token appears
+expressao IGUAL expressao . 
+
+** Conflict (shift/reduce) in state 83.
+** Tokens involved: MENORIGUAL MAIORIGUAL
+** The following explanations concentrate on token MENORIGUAL.
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO expressao MAIOR expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               comando list(comando) 
+                                                               comando_atribuicao 
+                                                               expressao ATRIB expressao 
+                                                               (?)
+
+** In state 83, looking ahead at MENORIGUAL, shifting is permitted
+** because of the following sub-derivation:
+
+expressao MAIOR expressao 
+                expressao . MENORIGUAL expressao 
+
+** In state 83, looking ahead at MENORIGUAL, reducing production
+** expressao -> expressao MAIOR expressao 
+** is permitted because of the following sub-derivation:
+
+expressao MENORIGUAL expressao // lookahead token appears
+expressao MAIOR expressao . 
+
+** Conflict (shift/reduce) in state 81.
+** Tokens involved: MENORIGUAL MAIORIGUAL
+** The following explanations concentrate on token MENORIGUAL.
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO expressao CONCAT expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               comando list(comando) 
+                                                               comando_atribuicao 
+                                                               expressao ATRIB expressao 
+                                                               (?)
+
+** In state 81, looking ahead at MENORIGUAL, shifting is permitted
+** because of the following sub-derivation:
+
+expressao CONCAT expressao 
+                 expressao . MENORIGUAL expressao 
+
+** In state 81, looking ahead at MENORIGUAL, reducing production
+** expressao -> expressao CONCAT expressao 
+** is permitted because of the following sub-derivation:
+
+expressao MENORIGUAL expressao // lookahead token appears
+expressao CONCAT expressao . 
+
+** Conflict (shift/reduce) in state 78.
+** Tokens involved: MENORIGUAL MAIORIGUAL
+** The following explanations concentrate on token MENORIGUAL.
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO expressao DIV expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               comando list(comando) 
+                                                               comando_atribuicao 
+                                                               expressao ATRIB expressao 
+                                                               (?)
+
+** In state 78, looking ahead at MENORIGUAL, reducing production
+** expressao -> expressao DIV expressao 
+** is permitted because of the following sub-derivation:
+
+expressao MENORIGUAL expressao // lookahead token appears
+expressao DIV expressao . 
+
+** In state 78, looking ahead at MENORIGUAL, shifting is permitted
+** because of the following sub-derivation:
+
+expressao DIV expressao 
+              expressao . MENORIGUAL expressao 
+
+** Conflict (shift/reduce) in state 76.
+** Tokens involved: MENORIGUAL MAIORIGUAL
+** The following explanations concentrate on token MENORIGUAL.
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO expressao MAIS expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               comando list(comando) 
+                                                               comando_atribuicao 
+                                                               expressao ATRIB expressao 
+                                                               (?)
+
+** In state 76, looking ahead at MENORIGUAL, reducing production
+** expressao -> expressao MAIS expressao 
+** is permitted because of the following sub-derivation:
+
+expressao MENORIGUAL expressao // lookahead token appears
+expressao MAIS expressao . 
+
+** In state 76, looking ahead at MENORIGUAL, shifting is permitted
+** because of the following sub-derivation:
+
+expressao MAIS expressao 
+               expressao . MENORIGUAL expressao 
+
+** Conflict (shift/reduce) in state 74.
+** Tokens involved: MENORIGUAL MAIORIGUAL
+** The following explanations concentrate on token MENORIGUAL.
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO expressao MENOR expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               comando list(comando) 
+                                                               comando_atribuicao 
+                                                               expressao ATRIB expressao 
+                                                               (?)
+
+** In state 74, looking ahead at MENORIGUAL, reducing production
+** expressao -> expressao MENOR expressao 
+** is permitted because of the following sub-derivation:
+
+expressao MENORIGUAL expressao // lookahead token appears
+expressao MENOR expressao . 
+
+** In state 74, looking ahead at MENORIGUAL, shifting is permitted
+** because of the following sub-derivation:
+
+expressao MENOR expressao 
+                expressao . MENORIGUAL expressao 
+
+** Conflict (shift/reduce) in state 72.
+** Tokens involved: OULOG MULT MENOS MENORIGUAL MENOR MAIS MAIORIGUAL MAIOR IGUAL ELOG DIV DIFER CONCAT
+** The following explanations concentrate on token OULOG.
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO expressao MAIORIGUAL expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               comando list(comando) 
+                                                               comando_atribuicao 
+                                                               expressao ATRIB expressao 
+                                                               (?)
+
+** In state 72, looking ahead at OULOG, reducing production
+** expressao -> expressao MAIORIGUAL expressao 
+** is permitted because of the following sub-derivation:
+
+expressao OULOG expressao // lookahead token appears
+expressao MAIORIGUAL expressao . 
+
+** In state 72, looking ahead at OULOG, shifting is permitted
+** because of the following sub-derivation:
+
+expressao MAIORIGUAL expressao 
+                     expressao . OULOG expressao 
+
+** Conflict (shift/reduce) in state 70.
+** Tokens involved: MENORIGUAL MAIORIGUAL
+** The following explanations concentrate on token MENORIGUAL.
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO expressao MENOS expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               comando list(comando) 
+                                                               comando_atribuicao 
+                                                               expressao ATRIB expressao 
+                                                               (?)
+
+** In state 70, looking ahead at MENORIGUAL, reducing production
+** expressao -> expressao MENOS expressao 
+** is permitted because of the following sub-derivation:
+
+expressao MENORIGUAL expressao // lookahead token appears
+expressao MENOS expressao . 
+
+** In state 70, looking ahead at MENORIGUAL, shifting is permitted
+** because of the following sub-derivation:
+
+expressao MENOS expressao 
+                expressao . MENORIGUAL expressao 
+
+** Conflict (shift/reduce) in state 68.
+** Tokens involved: OULOG MULT MENOS MENORIGUAL MENOR MAIS MAIORIGUAL MAIOR IGUAL ELOG DIV DIFER CONCAT
+** The following explanations concentrate on token OULOG.
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO expressao MENORIGUAL expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               comando list(comando) 
+                                                               comando_atribuicao 
+                                                               expressao ATRIB expressao 
+                                                               (?)
+
+** In state 68, looking ahead at OULOG, reducing production
+** expressao -> expressao MENORIGUAL expressao 
+** is permitted because of the following sub-derivation:
+
+expressao OULOG expressao // lookahead token appears
+expressao MENORIGUAL expressao . 
+
+** In state 68, looking ahead at OULOG, shifting is permitted
+** because of the following sub-derivation:
+
+expressao MENORIGUAL expressao 
+                     expressao . OULOG expressao 
+
+** Conflict (shift/reduce) in state 66.
+** Tokens involved: MENORIGUAL MAIORIGUAL
+** The following explanations concentrate on token MENORIGUAL.
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO expressao MULT expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               comando list(comando) 
+                                                               comando_atribuicao 
+                                                               expressao ATRIB expressao 
+                                                               (?)
+
+** In state 66, looking ahead at MENORIGUAL, reducing production
+** expressao -> expressao MULT expressao 
+** is permitted because of the following sub-derivation:
+
+expressao MENORIGUAL expressao // lookahead token appears
+expressao MULT expressao . 
+
+** In state 66, looking ahead at MENORIGUAL, shifting is permitted
+** because of the following sub-derivation:
+
+expressao MULT expressao 
+               expressao . MENORIGUAL expressao 
+
+** Conflict (shift/reduce) in state 64.
+** Tokens involved: MENORIGUAL MAIORIGUAL
+** The following explanations concentrate on token MENORIGUAL.
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO expressao OULOG expressao 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               comando list(comando) 
+                                                               comando_atribuicao 
+                                                               expressao ATRIB expressao 
+                                                               (?)
+
+** In state 64, looking ahead at MENORIGUAL, shifting is permitted
+** because of the following sub-derivation:
+
+expressao OULOG expressao 
+                expressao . MENORIGUAL expressao 
+
+** In state 64, looking ahead at MENORIGUAL, reducing production
+** expressao -> expressao OULOG expressao 
+** is permitted because of the following sub-derivation:
+
+expressao MENORIGUAL expressao // lookahead token appears
+expressao OULOG expressao . 
+
+** Conflict (shift/reduce) in state 53.
+** Token involved: APAR
+** This state is reached from programa after reading:
+
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO RETORNE ID 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+programa 
+list(declaracao_de_variavel) list(declaracao_de_funcao) INICIO list(comando) FIM EOF 
+                                                               (?)
+
+** In state 53, looking ahead at APAR, shifting is permitted
+** because of the following sub-derivation:
+
+comando list(comando) 
+comando_retorno 
+RETORNE option(expressao) 
+        expressao 
+        chamada 
+        ID . APAR loption(separated_nonempty_list(VIRG,expressao)) FPAR 
+
+** In state 53, looking ahead at APAR, reducing production
+** variavel -> ID 
+** is permitted because of the following sub-derivation:
+
+comando list(comando) // lookahead token appears because list(comando) can begin with APAR
+comando_retorno // lookahead token is inherited
+RETORNE option(expressao) // lookahead token is inherited
+        expressao // lookahead token is inherited
+        variavel // lookahead token is inherited
+        ID . 

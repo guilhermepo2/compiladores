@@ -22,6 +22,7 @@ and 'expr decfn = {
 }
 
 and tipo = TipoInt
+         | TipoFloat
          | TipoString
          | TipoBool
          | TipoVoid
@@ -62,4 +63,3 @@ and oper =
   | E
   | Ou
   | Concat
-

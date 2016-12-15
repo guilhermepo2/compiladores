@@ -11,6 +11,7 @@ let rec posicao exp = let open S in
       | A.VarElemento (_,exp2) -> posicao exp2
     )
   | ExpInt (_,pos) -> pos
+  | ExpFloat (_,pos) -> pos
   | ExpString  (_,pos) -> pos
   | ExpBool (_,pos) -> pos
   | ExpOp ((_,pos),_,_)  -> pos
@@ -49,6 +50,7 @@ let nome_tipo t =
   let open A in
     match t with
       TipoInt -> "inteiro"
+    | TipoFloat -> "float"
     | TipoString -> "string"
     | TipoBool -> "bool"
     | TipoVoid -> "void"
@@ -64,6 +66,7 @@ let mesmo_tipo pos msg tinf tdec =
 let rec infere_exp amb exp =
   match exp with
     S.ExpInt n    -> (T.ExpInt (fst n, A.TipoInt),       A.TipoInt)
+  | S.ExpFloat f  -> (T.ExpFloat (fst f, A.TipoFloat), A.TipoFloat)
   | S.ExpString s -> (T.ExpString (fst s, A.TipoString), A.TipoString)
   | S.ExpBool b   -> (T.ExpBool (fst b, A.TipoBool),     A.TipoBool)
   | S.ExpVar v ->
@@ -93,7 +96,8 @@ let rec infere_exp amb exp =
 
     let verifica_aritmetico () =
       (match tesq with
-         A.TipoInt ->
+         A.TipoInt
+         | A.TipoFloat ->
          let _ = mesmo_tipo (snd op)
                       "O operando esquerdo eh do tipo %s mas o direito eh do tipo %s"
                       tesq tdir
@@ -107,6 +111,7 @@ let rec infere_exp amb exp =
     and verifica_relacional () =
       (match tesq with
          A.TipoInt
+       | A.TipoFloat
        | A.TipoString ->
          let _ = mesmo_tipo (snd op)
                    "O operando esquerdo eh do tipo %s mas o direito eh do tipo %s"

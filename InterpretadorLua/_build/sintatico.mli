@@ -13,6 +13,7 @@ type token =
   | PTO of (Lexing.position)
   | PROGRAMA of (Lexing.position)
   | PPTO of (Lexing.position)
+  | PFLUTUANTE of (Lexing.position)
   | PASSO of (Lexing.position)
   | OULOG of (Lexing.position)
   | MULT of (Lexing.position)
@@ -30,6 +31,7 @@ type token =
   | FUNCAO of (Lexing.position)
   | FPAR of (Lexing.position)
   | FOR of (Lexing.position)
+  | FLOAT of (float * Lexing.position)
   | FIM of (Lexing.position)
   | FCOL of (Lexing.position)
   | EOF

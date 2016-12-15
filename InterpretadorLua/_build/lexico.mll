@@ -19,6 +19,8 @@
 let digito = ['0' - '9']
 let inteiro = '-'? digito+
 
+let floate = (((digito+ '.' digito*) | '.' digito+)(['e' 'E'] ['+' '-']? (digito+))? | digito+ ['e' 'E'] ['+' '-']? (digito+))
+
 let letra = ['a' - 'z' 'A' - 'Z']
 let identificador = letra ( letra | digito | '_')*
 
@@ -67,6 +69,7 @@ rule token =
 
   | "end"        { FIM (pos_atual lexbuf) }
   | "inteiro"    { INTEIRO (pos_atual lexbuf) }
+  | "float"      { PFLUTUANTE (pos_atual lexbuf)}
   | "cadeia"     { CADEIA (pos_atual lexbuf) }
   | "booleano"   { BOOLEANO (pos_atual lexbuf) }
   | "arranjo"    { ARRANJO (pos_atual lexbuf) }
@@ -87,6 +90,7 @@ rule token =
   | "falso"      { BOOL (false, pos_atual lexbuf) }
   | identificador as x    { ID (x, pos_atual lexbuf) }
   | inteiro as n  { INT (int_of_string n, pos_atual lexbuf) }
+  | floate as num  { FLOAT (float_of_string num, pos_atual lexbuf)}
   | _  { raise (Erro ("Caracter desconhecido: " ^ Lexing.lexeme lexbuf)) }
   | eof   { EOF }
 

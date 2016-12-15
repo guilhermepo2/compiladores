@@ -6,6 +6,7 @@ open Sast
 %}
 
 %token <int * Lexing.position> INT
+%token <float * Lexing.position> FLOAT
 %token <string * Lexing.position> ID
 %token <string * Lexing.position> STRING
 %token <bool * Lexing.position> BOOL
@@ -16,7 +17,7 @@ open Sast
 %token <Lexing.position> VIRG DPTOS PTO PPTO
 %token <Lexing.position> ACOL FCOL
 %token <Lexing.position> APAR FPAR
-%token <Lexing.position> INTEIRO CADEIA BOOLEANO
+%token <Lexing.position> INTEIRO CADEIA BOOLEANO PFLUTUANTE
 %token <Lexing.position> ARRANJO DE
 %token <Lexing.position> REGISTRO
 %token <Lexing.position> SE ENTAO SENAO
@@ -91,6 +92,7 @@ tipo: t=tipo_simples  { t }
 
 
 tipo_simples: INTEIRO  { TipoInt    }
+            | PFLUTUANTE    { TipoFloat  }
             | CADEIA   { TipoString }
             | BOOLEANO { TipoBool   }
 
@@ -156,6 +158,7 @@ expressao:
          | v=variavel { ExpVar v    }
          | i=INT      { ExpInt i    }
          | s=STRING   { ExpString s }
+         | f=FLOAT    { ExpFloat f  }
          | b=BOOL     { ExpBool b   }
 	       | e1=expressao op=oper e2=expressao { ExpOp (op, e1, e2) }
          | c = chamada  { c }

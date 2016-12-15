@@ -9,145 +9,221 @@ module I = Sintatico.MenhirInterpreter
 
 open Semantico
 
+
+(* This file was auto-generated based on "sintatico.msg". *)
+
+(* Please note that the function [message] can raise [Not_found]. *)
+
 let message =
   fun s ->
     match s with
     | 0 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 1 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 34 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 35 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 36 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 72 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 47 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 48 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
+        "Esperava um programa.\n"
     | 49 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 51 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 52 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 55 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 56 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 57 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 58 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 61 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 62 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 63 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 64 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 73 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 74 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 95 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 89 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 97 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 98 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
+        "Esperava um '('\n"
+    | 50 ->
+        "Esperava uma expressão\n"
     | 99 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
+        "Esperava um operador binário ou um ')'\n"
+    | 100 ->
+        "Esperava a palavra chave 'DO'\n"
+    | 101 ->
+        "Esperava uma lista de comandos.\n"
+    | 156 ->
+        "Esperava uma lista de comandos após BEGIN\n"
+    | 128 ->
+        "Operação Inválida, após uma expressão faça uma atribuição, utilize um operador binário ou separe por virgula caso esteja chamando ou declarando uma função.\n"
+    | 97 ->
+        "Esperava por mais expressões ou por um ')'\n"
+    | 124 ->
+        "Erro após expressão\n"
+    | 63 ->
+        "Esperava uma expressão após o operador\n"
+    | 64 ->
+        "Esperava um operador ou um ')'\n"
     | 65 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
+        "Esperava por uma expressão\n"
     | 66 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 53 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 67 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 68 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 59 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 60 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 42 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 41 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
+        "Esperava por um operador ou um ')'\n"
+    | 69 ->
+        "Esperava por uma expressão\n"
     | 70 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
+        "Esperava por um operador ou um ')'\n"
+    | 67 ->
+        "Esperava por uma expressao\n"
+    | 68 ->
+        "Esperava por um operador ou um ')'\n"
+    | 73 ->
+        "Esperava por uma expressao\n"
+    | 74 ->
+        "Esperava por um operador ou um ')'\n"
     | 75 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 77 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
+        "Esperava por uma expressao\n"
     | 76 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 105 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
+        "Esperava por um operador ou um ')'\n"
+    | 71 ->
+        "Esperava uma expressao\n"
+    | 72 ->
+        "Esperava por um operador ou um ')'\n"
+    | 82 ->
+        "Esperava uma expressao\n"
+    | 83 ->
+        "Esperava por um operador ou um ')'\n"
     | 84 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 43 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
+        "Esperava uma expressao\n"
     | 85 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
+        "Esperava por um operador ou um ')'\n"
     | 86 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 45 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 46 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 102 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 103 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
+        "Esperava uma expressao\n"
+    | 87 ->
+        "Esperava por um operador ou um ')'\n"
+    | 77 ->
+        "Esperava uma expressao\n"
+    | 78 ->
+        "Esperava por um operador ou um ')'\n"
+    | 88 ->
+        "Espera uma expressao\n"
+    | 89 ->
+        "Esperava por um operador ou um ')'\n"
+    | 80 ->
+        "Esperava uma expressão após a concatenação.\n"
     | 81 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 3 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 2 ->
-        "<YOUR SYNTAX ERROR MESSAGE HERE>\n"
-    | 6 ->
-        "estado 6: esperava um tipo. Exemplo:\n   x : inteiro;\n"
-    | 7 ->
-        "estado 7: esperava a definicao de um campo. Exemplo:\n   i: registro\n         parte_real: inteiro;\n         parte_imag: inteiro;\n      fim registro;\n      "
-    | 8 ->
-        "estado 8: esperava ':'. Exemplo:\n   x: inteiro;\n   "
-    | 9 ->
-        "estado 9: esperava um tipo. Exemplo:\n   x: inteiro;\n"
-    | 25 ->
-        "estado 25: esperva um ';'.\n"
-    | 26 ->
-        "estado 26: uma declaracao foi encontrada. Para continuar era\n   esperado uma outra declara\195\167\195\163o ou a palavra 'inicio'.\n"
-    | 29 ->
-        "estado 29: espera a palavra 'registro'. Exemplo:\n   i: registro\n         parte_real: inteiro;\n         parte_imag: inteiro;\n      fim registro;\n"
-    | 31 ->
-        "estado 31: esperava um ';'. \n"
+        "Esperava por um operador ou um ')'\n"
+    | 129 ->
+        "Esperava por uma expressão após a atribuição\n"
+    | 130 ->
+        "Esperava por um operador ou um ')'\n"
+    | 102 ->
+        "Esperava por um '('\n"
+    | 103 ->
+        "Esperava por uma expressão no teste do if\n"
+    | 104 ->
+        "Esperava por um operador ou um ')'\n"
+    | 105 ->
+        "Esperava pela palavra chave THEN\n"
+    | 106 ->
+        "Esperava por uma lista de comandos após o BEGIN\n"
+    | 145 ->
+        "Esperava por um else ou pela palavra chave end\n"
+    | 143 ->
+        "Esperava uma lista de comandos para o else\n"
+    | 147 ->
+        "Esperava pela palavra chave end\n"
     | 107 ->
-        "estado 107: uma declaracao foi encontrada. Para continuar era\n   esperado uma outra declara\195\167\195\163o ou a palavra 'inicio'.\n"
+        "Esperava uma por um '('\n"
+    | 108 ->
+        "Esperava por uma lista de expressoes ou um ')'\n"
+    | 109 ->
+        "Esperava um ')'\n"
+    | 111 ->
+        "Erro após o retorno\n"
+    | 113 ->
+        "Esperava um operador ou operação inválida após o retorno\n"
+    | 139 ->
+        "Esperava por uma lista de comandos\n"
+    | 53 ->
+        "Esperava um '(' ou um operador para a variavel\n"
+    | 59 ->
+        "Esperava um por identificador após o ponto\n"
+    | 58 ->
+        "Esperava por uma operação na expressão, por um ponto ou por um '['\n"
+    | 54 ->
+        "Esperava por expressoes ou por um ')'\n"
+    | 96 ->
+        "Esperava por um operador, um ')' ou por outra expressão separada por vírgula\n"
+    | 94 ->
+        "Esperava por um ')'\n"
+    | 141 ->
+        "Erro após chamada de função\n"
+    | 61 ->
+        "Esperava uma expressão após '['\n"
+    | 62 ->
+        "Esperava por um operador ou um ']'\n"
+    | 114 ->
+        "Esperava por uma expressao após o for\n"
+    | 115 ->
+        "Esperava um operador ou por uma virgula para separar as expressoes\n"
+    | 116 ->
+        "Esperava por uma expressao apos a virgula\n"
+    | 117 ->
+        "Esperava por um operador ou por uma virgula\n"
+    | 118 ->
+        "Esperava por uma expressao após a vírgula\n"
+    | 119 ->
+        "Esperava pelo passo do for\n"
+    | 120 ->
+        "Esperava por um inteiro\n"
+    | 122 ->
+        "Esperava pela palavra chave 'do'\n"
+    | 123 ->
+        "Esperava por uma lista de comandos\n"
+    | 158 ->
+        "Esperava pelo fim do programa\n"
+    | 57 ->
+        "Esperava uma expressão após '('\n"
+    | 91 ->
+        "Esperava por um operador ou um ')'\n"
+    | 1 ->
+        "Esperava por um vírgula ou dois pontos após o identificador\n"
+    | 2 ->
+        "Esperava por um identificador após a virgula\n"
+    | 5 ->
+        "Esperava pela declaração do tipo da variavel\n"
+    | 6 ->
+        "Erro após declaração de registro\n"
+    | 7 ->
+        "Esperava por dois pontos e o tipo após o identificador\n"
+    | 8 ->
+        "Esperava pela declaração do tipo da variavel\n"
+    | 25 ->
+        "Esperava pela palavra chave end ou por uma lista de registros\n"
+    | 28 ->
+        "Esperava por um registro\n"
+    | 153 ->
+        "Esperava por declaração de variaveis\n"
     | 13 ->
-        "estado 13: esperava um '['. Exemplo:\n   arranjo [1..10] de inteiro;\n"
+        "Esperava por um '['\n"
     | 14 ->
-        "estado 14: esperava os limites do vetor. Exemplo:\n   arranjo [1..10] de inteiro;\n"
+        "Esperava algo após o '['\n"
     | 15 ->
-        "estado 15: esperava '..'. Exemplo:\n   1 .. 10\n"
+        "Erro na declaração do arranjo depois de '['\n"
     | 16 ->
-        "estado 16: esperava um numero inteiro. Exemplo:\n   1 .. 10\n"
+        "Erro na declaração de arranjo, esperava um inteiro\n"
     | 18 ->
-        "estado 18: esperava um ']'. Exemplo\n   arranjo [1..10] de inteiro;\n"
+        "Esperava um ']'\n"
     | 19 ->
-        "estado 19: esperava a palavra reservada 'de'. Exemplo:\n   arranjo [1..10] de inteiro;\n"
+        "Esperava pela declaração do tipo do arranjo\n"
     | 20 ->
-        "estado 20: esperava um tipo. Exemplo\n   arranjo [1..10] de inteiro;\n"
+        "Esperava pela declaração do tipo do arranjo\n"
+    | 33 ->
+        "Esperava pelo nome da função\n"
+    | 34 ->
+        "Esperava por um '('\n"
+    | 35 ->
+        "Esperava pelos argumentos da função ou um ')'\n"
+    | 36 ->
+        "Esperava pelo tipo do argumento de entrada da função\n"
+    | 37 ->
+        "Esperava pelo tipo do parametro\n"
+    | 40 ->
+        "Esperava por um ')' ou por mais argumentos separados por vírgula\n"
+    | 41 ->
+        "Esperava por mais parametros ou por um ')'\n"
+    | 44 ->
+        "Esperava pela declaração do tipo de retorno da função\n"
+    | 45 ->
+        "Esperava pela declaração do tipo de retorno da função\n"
+    | 46 ->
+        "Esperava pelas declarações de variáveis da função ou pela palavra chave begin\n"
+    | 48 ->
+        "Esperava pelo corpo da função ou pela palavra chave end\n"
+    | 47 ->
+        "Esperava pela palavra chave begin\n"
+    | 160 ->
+        "Esperava por mais uma declaração de função ou pelo início do programa.\n"
     | _ ->
         raise Not_found
+
 
 let posicao lexbuf =
     let pos = lexbuf.lex_curr_p in
